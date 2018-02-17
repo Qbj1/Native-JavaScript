@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="{CHARSET}">
+	<title></title>
+</head>
+
+<body>
+	<input type="text" name="" id="text1" value="" /> +
+	<input type="text" name="" id="text2" value="" />
+	<input type="button" name="btn" id="btn" value="=" />
+	<span id="sp">
+
+		</span>
+	<script type="text/javascript">
+		window.onload = function() {
+			var te = document.getElementById('text1');
+			var ts = document.getElementById('text2');
+			var bt = document.getElementById('btn');
+			var sp = document.getElementById('sp');
+			bt.onclick = function() {
+				var v1 = parseFloat(te.value);
+				var v2 = parseFloat(ts.value);
+				sp.innerHTML = v1 + v2;
+			}
+
+		}
+	</script>
+</body>
+
+</html>

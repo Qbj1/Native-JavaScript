@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            position: absolute;
+            top: 25px;
+            left: 200px;
+        }
+        #box div {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+             transition: 0.5s;
+             opacity: 0.2;
+            /* background: #f00;
+            color: #fff; */
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+
+    <script>
+        var box = document.getElementById('box');
+        /*
+            行数为9  i   决定top值 (每一行的top值相同)  top = i * 方块高度
+            列数为10  j  决定left值 (每一行的left值相同) left = j * 方块宽度
+        */
+        var str = '';
+        // for(var i=0;i<9;i++){
+        //     for(var j =0;j<10;j++){
+        //         str += '<div style="top:'+i*102+'px;left:'+j*102+'px;background:url(images/pic.jpg) -'+j*100+'px -'+i*100+'px;"></div>';
+        //     }
+        // }
+       for(var i=0;i<90;i++){
+            str+='<div style="left:'+i%10*102+'px;top:'+(parseInt(i/10)*102)+'px;background:url(img/dz.png) -'+i%10*100+'px -'+(parseInt(i/10)*100)+'px"></div>';
+        }
+        box.innerHTML = str;
+        var divs = document.querySelectorAll('#box div');
+        for(var i =0;i<divs.length;i++){
+            divs[i].onmouseover = function(){
+                this.style.opacity = 1;
+                this.style.transform = 'scale(1.5)';
+            }
+            divs[i].onmouseout = function(){
+                this.style.transform = 'scale(1)';
+            }
+        }
+    </script>
+</body>
+</html>

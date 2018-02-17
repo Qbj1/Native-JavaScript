@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<style type="text/css">
+			.box {
+				width: 576px;
+				margin: auto;
+			}
+			
+			.box h3 {
+				font: bold 20px/34px "微软雅黑";
+				text-align: center;
+				margin-bottom: 12px;
+			}
+			
+			.box #data {
+				width: 510px;
+				height: 89px;
+				margin: 0 auto;
+				border: 1px solid #cbcccc;
+				padding: 11px 0 0 10px;
+				font: 14px/20px "微软雅黑";
+				color: #000000;
+			}
+			
+			#btn {
+				margin: 20px 0 10px 237px;
+				border: 1px solid #eee;
+				width: 98px;
+				height: 28px;
+				text-align: center;
+				font: 14px/28px "微软雅黑";
+				color: #656566;
+				background: #fff;
+				cursor: pointer;
+			}
+			
+			ul {
+				margin-left: 30px;
+				margin-top: 30px;
+			}
+			
+			ul li {
+				margin: 20px 0;
+				font-size: 20px;
+			}
+		</style>
+		<script type="text/javascript">
+			//	检测数据类型
+			//	   var s=-27;
+			//	   console.log(typeof s);
+			//  转换数据类型
+			//	     任意类型转数字
+			//       var a=true;
+			//	     console.log(Number(a));
+			//	     字符串转数字
+			//	     var b='kaivon';
+			//	     var c='49.9元';
+			//       console.log(parseInt(b));//NaN
+			//	     console.log(parseInt(c));//转整数
+			//	     console.log(parseFloat(c));//转小数
+			//    isNaN()判断是不是NaN,判断之前先Number();
+			//       console.log(isNaN(b));//true
+			//    转字符串String()    转布尔值Boolean()
+
+			window.onload = function() {
+				var arr = [-27, 'kaivon', 6 - '20%', [], -5900, '800', function() {
+					alert('陈学辉');
+				}, , 'xyz' - 90, null, '66', document, [], true, '198px' - 30, '49.9元', 5, function() {
+					alert(3);
+				}, Number('abc')];
+				var obtn = document.getElementById('btn');
+				var ali = document.getElementsByTagName('li');
+				var aspan = document.getElementsByTagName('span')
+				var on = true;
+				var arr1 = [];
+				var max = '';
+
+				obtn.onclick = function() {
+					if(on) {
+						for(var i = 0; i < arr.length; i++) {
+							if(Number(arr[i]) === arr[i]) {
+								//通过判断Number转换出来的数是不是全等于他没转换之前的数；Number转换出来之后  为数字 且属于数字类型，而如果数组它本身就是数字的话  那么他们全等（true） 
+								aspan[0].innerHTML += arr[i] + ',';
+							};
+
+							if(parseFloat(arr[i]) === parseFloat(arr[i])) { //因为Number和parseInt能转的parseFloat都能转，又因为只需判断能转的数字，空数组与布尔值不管，所以判断parseFloat转出来的东西全等就行。  
+								aspan[1].innerHTML += arr[i] + ',';
+							};
+
+							if(parseFloat(arr[i]) === parseFloat(arr[i])) { //上一题的方法
+								arr1.push(parseFloat(arr[i])); //把转出来的数用个数组存起来				
+								max = arr1[0] //假设数组的第一个数为最大数						
+								for(var j = 0; j < arr1.length; j++) {
+									//循环新数组
+									if(max < arr1[j]) {
+										//把每次循环出来的数和max比较
+										max = arr1[j]; //如果上步比较为真   则这个数是比上一个数大   然后存起来  一直比较 最终得出最大值
+									};
+								};
+								aspan[2].innerHTML = max;
+							};
+
+							if((arr[i]) !==(arr[i])) { //如果 数组本身等于他本身为真，那么他就不是NaN。利用NaN本身不等于本身（false）的方法判断出NaN的位置
+								aspan[3].innerHTML += i + ',';
+							} 
+						};
+
+					}
+					on = false;
+				}
+			}
+			//console.log(6-'20%');
+		</script>
+	</head>
+
+	<body>
+		<div class="box">
+			<h3>默认数据</h3>
+			<div id="data">
+				-27,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'kaivon',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6-'20%',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[],&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-5900,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'800',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function(){alert('陈学辉');},,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'xyz'-90,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;null,&nbsp;&nbsp;&nbsp;'66',&nbsp;&nbsp;&nbsp; document,&nbsp;&nbsp;&nbsp;[],&nbsp;&nbsp;&nbsp;true,&nbsp;&nbsp;&nbsp;'198px'-30,&nbsp;&nbsp;&nbsp;'49.9元',&nbsp;&nbsp;&nbsp;5,&nbsp;&nbsp;&nbsp;function(){alert(3);},&nbsp;&nbsp;&nbsp;Number('abc')
+			</div>
+			<input type="button" id="btn" name="" value="查看结果" />
+			<ul>
+				<li>所有数字：<span></span></li>
+				<li>可以转成数字的值：<span></span></li>
+				<li>转换后的最大数值：<span></span></li>
+				<li>数组中NaN的位置：<span></span></li>
+			</ul>
+		</div>
+	</body>
+
+</html>

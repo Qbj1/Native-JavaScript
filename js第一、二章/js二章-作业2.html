@@ -1,0 +1,242 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>无标题文档</title>
+		<style>
+			li {
+				list-style: none;
+			}
+			input{
+				width: 50px;
+				height:50px;
+			}
+			strong{
+				display: inline-block;
+				width: 20px;
+				text-align: center;
+				margin: 0 10px;
+			}
+			.p {
+				padding-left: 40px;
+			}
+		</style>
+		<!--<script>
+			window.onload = function() {
+				//获取li元素
+				var oUl = document.getElementById('list');
+				var aLi = oUl.getElementsByTagName('li');
+				//获取p标签
+				var oDiv = document.getElementById('p');
+				var aP = oDiv.getElementsByTagName('p');
+				//通过for循环调用函数并传递参数
+				for(var i = 0; i < aLi.length; i++) {
+					//当循环条件成立后执行代码块，输出不同的值函数被调用了5次，每次输出不同的值
+					fn1(aLi[i]);
+				}
+				//定义一个函数
+				function fn1(oLi) {
+					//获取参数中对应的标签
+					var aBtn = oLi.getElementsByTagName('input');
+					var oSpan = oLi.getElementsByTagName('span')[0];
+					var oStrong = oLi.getElementsByTagName('strong')[0];
+					var oEm = oLi.getElementsByTagName('em')[0];
+					//将HTML中获取的字符串转化为数值
+					var n1 = Number(oStrong.innerHTML);
+					var n2 = parseFloat(oEm.innerHTML);
+					aBtn[0].onclick = function() {
+						n1--;
+						//判断n1的值的大小
+						if(n1 < 0) {
+							n1 = 0;
+						}
+						//将内容输出到页面中，计算商品的总数量
+						oStrong.innerHTML = n1;
+						//将内容输出到页面中，计算商品的总价格
+						oSpan.innerHTML = n1 * n2 + '元';
+						//每次调用时重新获取标签内的值
+						fn2('strong', Number, 0, '商品总数量为:', '件');
+						fn2('span', parseFloat, 1, '商品总价格为:', '元');
+						fn3();
+					};
+					aBtn[1].onclick = function() {
+						//每点击一次strong标签内的值加一
+						n1++;
+						//将值输出进html内,计算数量
+						oStrong.innerHTML = n1;
+						//计算商品的总价值,个数乘以单价
+						oSpan.innerHTML = n1 * n2 + '元';
+						//每次点击时重新获取数据
+						fn2('strong', Number, 0, '商品总数量为:', '件');
+						fn2('span', parseFloat, 1, '商品总价格为:', '元');
+						fn3();
+					};
+
+				};
+				//定义函数获取商品的总数量和总价格
+				function fn2(b, d, t, e, n) {
+					//定义数组接收数据
+					var arr = [];
+					//定义求和变量
+					var str = null;
+					//每次调用时重新获取商品的所有个数
+					for(var i = 0; i < aLi.length; i++) {
+						//每次for循环条件成立则执行代码,获取数据
+						var a = aLi[i].getElementsByTagName(b)[0];
+						//将获取的数据推送到数组中，转换为数值
+						var n1 = d(a.innerHTML);
+						arr.push(n1);
+						//每次for循环将数内的内容相加，获取最终的数量
+						str += arr[i];
+
+					}
+					//将获取的数据输入到HTML中
+					aP[t].innerHTML = e + str + n;
+				};
+
+				//定义函数后取其中最贵的商品
+				function fn3() {
+					//定义函数接收数据，接受所有的小计价格
+					var arr = [];
+					//接收买过后的em标签内的价格
+					var arr1 = [];
+
+					for(var i = 0; i < aLi.length; i++) {
+						//循环获取数据
+						var a = aLi[i].getElementsByTagName('span')[0];
+						//将获取的数据转换为浮点数
+						var n1 = parseFloat(a.innerHTML);
+						//将至推送进数组
+						arr.push(n1);
+						//判断数组中的值是否大于0，条件成立执行代码
+						if(arr[i] > 0) {
+							//获取相应的em标签
+							var b = aLi[i].getElementsByTagName('em')[0];
+							var n2 = parseFloat(b.innerHTML);
+							arr1.push(n2);
+						
+						} else if(arr[i] === 0) {
+							//输出内容
+							aP[2].innerHTML = '最贵的商品为:0元';
+						}
+					}
+
+					//函数比较获取商品中最贵的价格
+					for(var i = 0; i < arr1.length; i++) {
+						//定义一个指针做函数的比较值
+						var j = arr1[1];
+						//判断值arr1[i]的值是否大于 j 
+						if(arr1[i] > j || arr1.length === 1) {
+							//将值赋值给变量 j
+							j = arr1[i];
+							//赋值给p标签
+							aP[2].innerHTML = '最贵的商品为:' + j + '元';
+							//如果arr1数组内的值数量为 2 并且 下标为1的值大于下标为0的值条件成立
+						} else if(arr1.length === 2 && arr1[1] > arr1[0]) {
+							//赋值给p标签
+							aP[2].innerHTML = '最贵的商品为:' + arr1[1] + '元';
+						}
+					}
+
+				};
+
+			};
+		</script>-->
+	</head>
+	<body>
+		<div>
+			<ul id="list">
+				<li>
+					<input type="button" value="-" />
+					<strong>0</strong>
+					<input type="button" value="+" /> 单价:
+					<em>34元</em> 小计:
+					<span>0元</span>
+				</li>
+				<li>
+					<input type="button" value="-" />
+					<strong>0</strong>
+					<input type="button" value="+" /> 单价:
+					<em>24元</em> 小计:
+					<span>0元</span>
+				</li>
+				<li>
+					<input type="button" value="-" />
+					<strong>0</strong>
+					<input type="button" value="+" /> 单价:
+					<em>10元</em> 小计:
+					<span>0元</span>
+				</li>
+				<li>
+					<input type="button" value="-" />
+					<strong>0</strong>
+					<input type="button" value="+" /> 单价:
+					<em>1.5元</em> 小计:
+					<span>0元</span>
+				</li>
+			</ul>
+			<p>
+				共购买了 <strong>0</strong> 件商品，单价最贵是：<strong>0</strong>元，合计 <strong>0</strong>元
+			</p>
+		</div>
+
+		<script type="text/javascript">
+			var li=document.querySelectorAll('li');		
+			for(var i=0;i<li.length;i++){
+				fn(li[i]);
+			}	
+			function fn(li){
+				var input=li.querySelectorAll('li input');
+				var strong=li.querySelector('li strong');
+				var em=li.querySelector('li em');
+				var span=li.querySelector('li span');
+				var n1=strong.innerHTML;
+				var n2=parseFloat(em.innerHTML);
+				input[0].onclick=function(){
+					n1--;
+					if(n1<0){
+						n1=0;
+					}
+					strong.innerHTML=n1;
+					span.innerHTML=n1*n2+'元';
+					total();
+				}
+				input[1].onclick=function(){
+					n1++;
+					strong.innerHTML=n1;
+					span.innerHTML=n1*n2+'元';
+					total();
+				}
+			}
+			function total(){
+				/*
+					1.修改共购买的数量
+					2.算出最贵的
+					3.算出一共多少钱
+				*/
+				var p=document.querySelector('p');
+				
+				//默认值
+				var buyNum=0;//商品数量
+				var most=0;//最贵的
+				var add=0;//总共多少钱
+				for(var i=0;i<li.length;i++){
+					//数量
+					var num=parseInt(li[i].querySelector('strong').innerHTML);//因为获取的是字符串，会拼接。所以要转数字才能相加
+					//单价
+					var price=parseFloat(li[i].querySelector('em').innerHTML);
+					//小计价格
+					var much=parseFloat(li[i].querySelector('span').innerHTML);
+					if(num>0){//单价最贵是在已购买的前提下
+						if(price>most){
+							most=price;
+						}
+					}
+					buyNum+=num;
+					add+=much;
+				}
+				p.innerHTML='共购买了 <strong>'+buyNum+'</strong> 件商品,单价最贵是：<strong>'+most+'</strong>元,合计 <strong>'+add+'</strong> 元'
+			}
+		</script>
+	</body>
+</html>

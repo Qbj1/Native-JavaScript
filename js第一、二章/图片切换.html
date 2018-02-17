@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+				text-decoration: none;
+			}
+			#box{
+				width: 400px;
+				height: 500px;
+				border: 1px solid #eee;
+				border-top: 1px double #000;
+				margin: auto;
+			}
+			#box input{
+				margin:10px 60px;
+			}
+			#box p{
+				line-height: 55px;
+				text-align: center;
+			}
+			#pic{
+				border: 10px solid #C0C0C0;
+				width: 380px;
+				height: 380px;
+				position: relative;
+			}
+			#pic p,#pic span{
+				display:block;
+				text-align: center;
+				line-height: 30px;
+				background: #009999;
+				opacity: .5;
+				width: 380px;
+				color: #000;
+			}
+			#pic p{position: absolute;bottom: 0;}
+			#pic span{position: absolute;top: 0;}
+			#pic a{
+				display: block;
+				width: 45px;height: 45px;
+				border: 5px solid #C0C0C0;
+				background: #009999;
+				opacity: .5;
+				position: absolute;
+				top: 165px;
+				text-align: center;
+				color: #000;
+				font: 30px/45px "微软雅黑";
+			}
+			#pic #prev{left: 0;}
+			#pic #next{right: 0;}
+			img{
+				width: 380px;
+				height: 380px;
+				}
+		</style>
+		<script type="text/javascript">
+			window.onload=function(){
+				var btn1=document.getElementById('btn1');
+				var btn2=document.getElementById('btn2');
+				var text1=document.getElementById('text1');
+				var prev=document.getElementById('prev');
+				var next=document.getElementById('next');
+				var img=document.getElementById('img');
+				var span=document.getElementById('span');
+				var otext=document.getElementById('text2');
+
+				var text3=['图片可以从最后一张跳到第一张切换','图片不能从最后一张跳到第一张切换'];
+				var text4=['文字1','文字2','文字3','文字4'];
+				var imgs=['img/1.jpg','img/2.jpg','img/3.jpg','img/4.jpg'];
+				var on=true;
+				//给按钮添加点击事件
+				btn1.onclick=function(){
+					on=true;
+					text1.innerHTML=text3[0];
+				};
+				btn2.onclick=function(){
+					on=false;
+					text1.innerHTML=text3[1];
+				};
+
+				//图片切换
+				var num=0;
+
+				function tab(){
+					span.innerHTML=num+1+'/'+imgs.length;
+					otext.innerHTML=text4[num];
+					img.src=imgs[num];
+				};
+				tab();
+				prev.onclick=function(){
+					num--;
+					if(num==-1){
+						num=imgs.length-1;
+						if(on==true){
+							num=imgs.length-1;
+						}else{
+							num=0;
+							alert('不能再点了');
+						}
+					}
+					tab();
+				};
+				next.onclick=function(){
+					num++;
+					if(num==imgs.length){
+						num=0;
+						if(on==true){
+							num=0;
+						}else{
+							num=imgs.length-1;
+							alert('不能再点了');
+
+						}
+					}
+					tab();
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box">
+			<input type="button" name="" id="btn1" value="循环切换" />
+			<input type="button" name="" id="btn2" value="顺序切换" />
+			<p id="text1">图片可以从最后一张跳到第一张切换</p>
+			<div id="pic">
+				<a href="javascript:;" id="prev">&lt;</a>
+				<a href="javascript:;" id="next">&gt;</a>
+				<img src="img/1.jpg" alt="" id="img"/>
+				<span id="span">1/4</span>
+				<p id="text2">文字1</p>
+			</div>
+		</div>
+		<!-- <script>
+			var as=document.querySelectorAll('#pic a');
+			var imgs=['img/1.jpg','img/2.jpg','img/3.jpg','img/4.jpg'];//存放图片的数组
+			var text=['文字1','文字2','文字3','文字4'];
+			var img=document.getElementById('img');
+			var span=document.getElementById('span');
+			var text2=document.getElementById('text2');
+			var input=document.querySelectorAll('input');
+			var text1=document.querySelector('#text1');
+			var num=0;
+			var on=true;//设置条件，true循环，false顺序
+			input[0].onclick=function(){
+				on=true;
+				text1.innerHTML='图片可以从最后一张跳到第一张切换';
+			}
+			input[1].onclick=function(){
+				on=false;
+				text1.innerHTML='图片不能从最后一张跳到第一张切换';
+			}
+			as[0].onclick=function(){
+				num--;
+				if(num==-1){
+					num=imgs.length-1;
+					if(on){
+						num=imgs.length-1;
+					}else{
+						num=0;
+					}
+				}
+				tab();
+			}
+			as[1].onclick=function(){
+				num++;
+				if(num==imgs.length){
+					num=0;
+					if(on){
+						num=0;
+					}else{
+						num=imgs.length-1;
+					}
+				}
+				tab();
+			}
+			//切换函数
+			function tab(){
+				img.src=imgs[num];
+				span.innerHTML=(num+1)+'/'+imgs.length;
+				text2.innerHTML=text[num];
+			}
+		</script> -->
+	</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{width: 50px;height: 50px;background: red;position: absolute;top: 0;left: 0;font-size: 30px;text-align: center;line-height: 50px;color: #fff;}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+		        var aDiv = document.getElementsByTagName("div"); 
+			var num = 100;
+		 	for(var i=0; i<num; i++){
+				      document.body.innerHTML += '<div>'+ i +'</div>';
+					}
+		 	console.dir(aDiv);
+			for(var j=0;j<aDiv.length;j++){
+						    aDiv[j].style.left = 10+(j%10)*60 +'px';
+							//parseInt函数
+						    aDiv[j].style.top = 10+parseInt(j/10)*60 +'px';
+						
+				}
+		};
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

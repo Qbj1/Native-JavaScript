@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+      ul{
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			body{
+				background: #f0f0f0;
+			}
+			#box{
+				width: 260px;
+				margin: 50px auto;
+				box-shadow: 0 20px 50px #333;
+				/*background: #ed5565;*/
+				background: #ed6355;
+				color: #fff;
+				font-family:"微软雅黑"
+			}
+			#box ul > li.active,#box div:hover{
+				background: #ed7f55;
+			}
+
+			#box ul > li div{
+				padding: 0 30px;
+				height: 50px;
+				line-height: 50px;
+			}
+			#box ul > li div span{
+				float: right;
+				font-size: 20px;
+				cursor: pointer;
+			}
+
+			#box li ul{
+				background: #383838;
+				display: none;
+			}
+			#box li ul li{
+				height: 40px;
+				line-height: 40px;
+				text-indent: 70px;
+				font-size: 12px;
+			}
+    </style>
+</head>
+<body>
+<div id="box">
+    <ul>
+        <li>
+            <div>Home<span style="transform: rotate(45deg);">+</span></div>
+            <ul style="display: block;">
+                <li>Web Design</li>
+                <li>Hosting</li>
+                <li>Design</li>
+                <li>Consulting</li>
+            </ul>
+        </li>
+        <li>
+            <div>Events<span>+</span></div>
+            <ul>
+                <li>Click</li>
+                <li>Mouseover</li>
+                <li>Mouseout</li>
+                <li>Dbclick</li>
+            </ul>
+        </li>
+        <li>
+            <div>Gallery<span>+</span></div>
+            <ul>
+                <li>Graphics</li>
+                <li>Vectors</li>
+                <li>Photoshop </li>
+            </ul>
+        </li>
+        <li>
+            <div>Service<span>+</span></div>
+            <ul>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>Javascript</li>
+            </ul>
+        </li>
+        <li>
+            <div>Portfolio<span>+</span></div>
+            <ul>
+                <li>Web Design</li>
+                <li>Hosting</li>
+                <li>Design</li>
+                <li>Consulting</li>
+            </ul>
+        </li>
+        <li>
+            <div>About<span>+</span></div>
+            <ul>
+                <li>Graphics</li>
+                <li>Vectors</li>
+                <li>Photoshop </li>
+            </ul>
+        </li>
+        <li>
+            <div>Concat<span>+</span></div>
+            <ul>
+                <li>Click</li>
+                <li>Mouseover</li>
+                <li>Mouseout</li>
+                <li>Dbclick</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<script>
+    var spans = document.querySelectorAll('span');
+    var uls = document.querySelectorAll('ul ul');
+    //每一个span加点击事件
+    //当个页面中多个相同元素-span有同样的行为-点击，可以用for循环来分别添加事件
+    for(var i=0;i<spans.length;i++){
+        spans[i].index = i;
+        spans[i].onclick = function(){
+            /*
+                点击之后要做的事情:
+                1.如果自己已经展开了，合上ul，将按钮样式旋转角度改为0
+                2.如果自己没展开，展开ul,将按钮样式旋转角度改为45 ，将展开的合上
+            */
+            if(uls[this.index].style.display == 'block'){
+                //合上ul
+                uls[this.index].style.display = 'none';
+                //将按钮样式旋转角度改为0
+                this.style.transform = 'rotate(0deg)';
+            }else{
+                //将别人合上 图标转0度
+                for(var i=0;i<spans.length;i++){
+                   uls[i].style.display='none';				//合上别人
+                   spans[i].style.transform='rotate(0deg)';	//别人的图标转0deg
+                }
+                //自己展开
+                uls[this.index].style.display = 'block';
+                //将按钮样式旋转角度改为45
+                this.style.transform = 'rotate(45deg)';
+            }
+        }
+    }
+</script>
+</script>
+</body>
+</html>

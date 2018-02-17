@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        dl,dd,p{
+				margin: 0;
+			}
+			table{
+				border-collapse:collapse;
+			}
+			th,td{
+				padding:0;
+			}
+			input{
+				margin: 0;
+				padding: 0;
+				vertical-align: middle;
+			}
+			label{
+				vertical-align: middle;
+			}
+			body{
+				font-family: "微软雅黑";
+			}
+			img{
+				vertical-align: middle;
+			}
+			a{
+				text-decoration: none;
+			}
+			.clearfix:after{
+				content: '';
+				display: block;
+				clear: both;
+			}
+			#shopping{
+				width: 1000px;
+				margin: 10px auto;
+			}
+			#shopping table{
+				width: 100%;
+			}
+			#shopping thead{
+				background: #f5f5f5;
+				border: 1px solid #ddd;
+			}
+			#shopping thead label{
+				margin-left: 10px;
+			}
+			#shopping thead th:nth-of-type(1){
+				text-align: left;
+				padding-left: 10px;
+			}
+			#shopping thead th:nth-of-type(2){
+				text-align: left;
+			}
+			#shopping th{
+				height: 50px;
+   				color: #333;
+   				font-size: 16px;
+   				font-weight: normal;
+			}
+			#shopping input{
+				width: 18px;
+				height: 18px;
+			}
+			#shopping label img{
+				background: #f4f4f4;
+				border: 1px solid #eaeaea;
+				margin-left: 20px;
+			}
+			.main td{
+				text-align: center;
+				padding: 15px 0;
+			}
+			.main{
+				border: 1px solid #ddd;
+			}
+			.main tr{
+				border-bottom: 1px dashed #ddd;
+			}
+			.main tr:hover,.main tr.active{
+				background: #fffbf0;
+			}
+			.space{
+				height: 20px;
+			}
+			.main tr td:nth-of-type(1){
+				text-align: left;
+				padding-left: 10px;
+				font-size: 0;
+				width: 180px;
+			}
+			.main tr td:nth-of-type(2){
+				text-align: left;
+				width: 230px;
+			}
+			.main p{
+				font-size: 14px;
+				color: #666;
+			}
+			.color{
+				position: relative;
+			}
+			.color a{
+				font-size: 12px;
+				color: #b4a078;
+				cursor: pointer;
+			}
+			.color a:hover{
+				color: #d90808;
+			}
+			.color div{
+				width: 370px;
+				height: 140px;
+				border: 1px solid #eaeaea;
+				box-shadow: 0 2px 2px #cecece;
+				background: #fff;
+				position: absolute;
+				top: 30px;
+				z-index: 10;
+				 display: none;
+			}
+			.color i{
+				display: block;
+				width: 16px;
+				height: 8px;
+				position: absolute;
+				left: 18px;
+				top: -8px;
+				background: url(img/ico_01.gif) no-repeat;
+			}
+			.color dl{
+				padding: 20px 0 0 34px;
+
+			}
+			.color dt{
+				float: left;
+				line-height: 48px;
+				margin-right: 16px;
+				font-size: 12px;
+				color: #747474;
+			}
+			.color dd{
+				width: 48px;
+				height: 48px;
+				border: 1px solid #ddd;
+				background: #f4f4f4;
+				float: left;
+				margin-right: 12px;
+				cursor: pointer;
+			}
+			.color dd:hover,.color dd.active{
+				border:2px solid #b4a078;
+				width: 46px;
+				height: 46px;
+				background: url(img/ico_02.gif) no-repeat right bottom;
+			}
+			.color dd:hover img,.color dd.active img{
+				width: 46px;
+				height: 46px;
+			}
+			.color dd img{
+				width: 48px;
+				height: 48px;
+			}
+			.color div span{
+				display: block;
+				width: 110px;
+				height: 28px;
+				background: #b4a078;
+				text-align: center;
+				line-height: 28px;
+				color: #fff;
+				font-size: 12px;
+				margin: 20px 0 0 73px;
+				border-radius: 2px;
+				cursor: pointer;
+			}
+			.color div span:hover{
+				background: #c0ae8a;
+			}
+
+
+			.main tr td:nth-of-type(3){
+				color: #d90808;
+				width: 200px;
+			}
+			.main tr td:nth-of-type(4){
+				font-size: 0;
+				width: 200px;
+			}
+			.main tr td:nth-of-type(4) span{
+				width: 24px;
+				height: 24px;
+				display: inline-block;
+				border: 1px solid #ddd;
+				text-align: center;
+				line-height: 24px;
+				font-size: 12px;
+				vertical-align: middle;
+				cursor: pointer;
+				font-size: 14px;
+			}
+			.main tr td:nth-of-type(4) strong{
+				width: 58px;
+				height: 24px;
+				line-height: 24px;
+				display: inline-block;
+				font-size: 12px;
+				text-align: center;
+				vertical-align: middle;
+				border-top: 1px solid #ddd;
+				border-bottom: 1px solid #ddd;
+			}
+			.main tr td:nth-of-type(5){
+				color: #d90808;
+				width: 200px;
+			}
+
+			#shopping tfoot{
+				background: #f5f5f5;
+				border: 1px solid #ddd;
+			}
+			#shopping tfoot td{
+				height: 60px;
+			}
+			#shopping tfoot td:nth-of-type(1){
+				padding-left: 10px;
+			}
+			#shopping tfoot td:nth-of-type(2){
+				text-align: right;
+				padding-right: 10px;
+			}
+			#shopping tfoot p{
+				color: #333;
+				font-size: 12px;
+			}
+			#shopping tfoot p:nth-of-type(1){
+				font-size: 14px;
+			}
+			#shopping tfoot p:nth-of-type(2){
+				color: #999;
+			}
+			#shopping tfoot strong{
+				color: #d90808;
+				font-size: 24px;
+			}
+    </style>
+</head>
+<body>
+    <section id="shopping">
+			<table>
+				<thead>
+					<tr>
+						<th>
+							<input type="checkbox" id="selectAll" />
+							<label for="selectAll">全选</label>
+						</th>
+						<th>商品信息</th>
+						<th>单价</th>
+						<th>数量</th>
+						<th>小计</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr colspan="7" class="space"></tr>
+				</tbody>
+				<tbody class="main">
+					<tr>
+						<td>
+							<input type="checkbox" id="single" />
+							<label for="single"><img src="img/img_01-1.png"/></label>
+						</td>
+						<td>
+							<p>打不翻的吸盘碗</p>
+							<div class="color">
+								<a href="javascript:;">粉色+</a>
+								<div>
+									<i></i>
+									<dl class="clearfix">
+										<dt>粉色</dt>
+										<dd class="active"><img src="img/img_01-1.png" alt="粉色"/></dd>
+										<dd><img src="img/img_01-2.png" alt="蓝色"/></dd>
+										<dd><img src="img/img_01-3.png" alt="黄色"/></dd>
+										<dd><img src="img/img_01-4.png" alt="绿色"/></dd>
+									</dl>
+									<span>确定</span>
+								</div>
+							</div>
+						</td>
+						<td>21.00元</td>
+						<td>
+							<span>-</span>
+							<strong>0</strong>
+							<span>+</span>
+						</td>
+						<td>0.00元</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="checkbox" />
+							<label><img src="img/img_02-1.png"/></label>
+						</td>
+						<td>
+							<p>韩式帆布电脑双肩包</p>
+							<div class="color">
+								<a href="javascript:;">黑色+</a>
+								<div>
+									<i></i>
+									<dl class="clearfix">
+										<dt>颜色</dt>
+										<dd class="active"><img src="img/img_02-1.png" alt="黑色"/></dd>
+										<dd><img src="img/img_02-2.png" alt="青色"/></dd>
+										<dd><img src="img/img_02-3.png" alt="蓝色"/></dd>
+									</dl>
+									<span>确定</span>
+								</div>
+							</div>
+						</td>
+						<td>227.00元</td>
+						<td>
+							<span>-</span>
+							<strong>0</strong>
+							<span>+</span>
+						</td>
+						<td>0.00元</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="checkbox" />
+							<label><img src="img/img_03-1.png"/></label>
+						</td>
+						<td>
+							<p>Carat钻石汤锅24cm</p>
+							<div class="color">
+								<a href="javascript:;">绿色+</a>
+								<div>
+									<i></i>
+									<dl class="clearfix">
+										<dt>颜色</dt>
+										<dd class="active"><img src="img/img_03-1.png" alt="绿色"/></dd>
+										<dd><img src="img/img_03-2.png" alt="黄色"/></dd>
+										<dd><img src="img/img_03-3.png" alt="银色"/></dd>
+									</dl>
+									<span>确定</span>
+								</div>
+							</div>
+						</td>
+						<td>78.00元</td>
+						<td>
+							<span>-</span>
+							<strong>0</strong>
+							<span>+</span>
+						</td>
+						<td>0.00元</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="checkbox" />
+							<label><img src="img/img_04-1.png"/></label>
+						</td>
+						<td>
+							<p>中筒皮毛一体雪地靴</p>
+							<div class="color">
+								<a href="javascript:;">栗色+</a>
+								<div>
+									<i></i>
+									<dl class="clearfix">
+										<dt>颜色</dt>
+										<dd class="active"><img src="img/img_04-1.png" alt="栗色"/></dd>
+										<dd><img src="img/img_04-2.png" alt="蓝色"/></dd>
+										<dd><img src="img/img_04-3.png" alt="紫色"/></dd>
+										<dd><img src="img/img_04-4.png" alt="红色"/></dd>
+									</dl>
+									<span>确定</span>
+								</div>
+							</div>
+						</td>
+						<td>359.00元</td>
+						<td>
+							<span>-</span>
+							<strong>0</strong>
+							<span>+</span>
+						</td>
+						<td>0.00元</td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr colspan="7" class="space"></tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td id="selected">已选（0）</td>
+						<td colspan="4">
+							<p>应付总额：<strong>0.00元</strong></p>
+							<p>最贵的商品为：0.00元</p>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</section>
+		<script>
+			var selectAll = document.getElementById('selectAll');
+			var inputs = document.querySelectorAll('.main input');
+			var trs = document.querySelectorAll('.main tr');
+			var selected = document.getElementById('selected');
+			var selectedNum = 0;	//选中的数量
+
+			//全选功能
+			selectAll.onclick = function(){
+				/*
+				* 点击后要做的事情
+				* 	1、自己打勾了
+				* 		1、让所有的单选按钮打勾
+				* 		2、每行都加上背景色
+				* 		3、下边已选的数字要变化
+				* 	2、自己没打勾
+				* 		1、让所有的单选按钮都不打勾
+				* 		2、每行都去掉背景色
+				* 		3、下边已选的数字要变化
+				*/
+				for(var i=0; i<inputs.length;i++){
+					inputs[i].checked = this.checked;
+					trs[i].className = this.checked?'active':'';
+					selectedNum = this.checked ? inputs.length:0;
+					selected.innerHTML = '已选('+selectedNum+')';
+				}
+			}
+			//单选
+			for(var i = 0;i<inputs.length;i++){
+				inputs[i].index = i;
+				inputs[i].onclick = function(){
+					/*
+					* 点击后要做的事情
+					* 	1、自己打勾了
+					* 		1、对应的tr加上背景色
+					* 		2、下边已选的数字要变化
+					* 		3、判断是否选中了所有的按钮，是的话，让上面的全选按钮选中
+					* 	2、自己没的打勾
+					* 		1、对应的tr去掉背景色
+					* 		2、下边已选的数字要变化
+					* 		3、让上面全选的按钮取消选中
+					*/
+					trs[this.index].className = this.checked?'active':'';
+					this.checked?selectedNum++:selectedNum--;
+					selected.innerHTML = '已选('+selectedNum+')';
+					selectAll.checked = selectedNum == inputs.length?true:false;
+				}
+			}
+			//颜色功能
+			var colorBtns = document.querySelectorAll('.color a');  //颜色按钮
+			var colorCons = document.querySelectorAll('.color div'); //颜色区域内容
+			var bigImgs = document.querySelectorAll('label img');  //
+			for(var i=0;i<colorBtns.length;i++){
+				colorBtns[i].index = i;
+				colorBtns[i].onclick = function(){
+					changeColor(this.index);
+				}
+			}
+			function changeColor(n){
+				//弹出层改变或隐藏
+				var dis = colorCons[n].style.display; //获取当前弹出层状态
+				colorCons[n].style.display = dis =='block'?'none':'block'; //显示就隐藏  隐藏就显示
+
+				//操作弹出层里的功能
+				var dt = colorCons[n].querySelector('dt');   //图片标题文字
+				var dds = colorCons[n].querySelectorAll('dd');  //所有颜色图片dd
+				var imgs = colorCons[n].querySelectorAll('img'); //所有颜色图片
+				var curImgSrc = imgs[0].src;    //当前图片地址
+				var sureBtn = colorCons[n].querySelector('span');  //点击按钮
+				for(var i=0;i<dds.length;i++){
+					dds[i].index = i;
+					dds[i].onclick = function(){
+						/*
+						* 点击后要做的事情
+						* 	1、选项卡的原理让自己变为选中状态，其他不选中
+						* 	2、图片前面的标题要换
+						* 	3、存一下选中图片的地址
+						*/
+						for(var i=0;i<dds.length;i++){
+							dds[i].className = '';
+						}
+						this.className = 'active';
+						dt.innerHTML = imgs[this.index].alt;
+						curImgSrc = imgs[this.index].src;
+					}
+				}
+				//点击确定按钮
+
+				sureBtn.onclick = function(){
+					/*
+					* 点击后要做的事情
+					* 	1、隐藏弹出层
+					* 	2、外面的颜色文字要变化
+					* 	3、外面的大图要变化
+					*/
+					colorCons[n].style.display = 'none';
+					colorBtns[n].innerHTML = dt.innerHTML+'+';
+					bigImgs[n].src = curImgSrc;
+				};
+			}
+			//商品加减功能
+			for(var i=0;i<trs.length;i++){
+				count(i);
+			}
+			function count(n){
+				var spans = trs[n].querySelectorAll('td:nth-of-type(4) span'); // - +按钮
+				var strong = trs[n].querySelector('td:nth-of-type(4) strong');//数量
+				var price = trs[n].querySelector('td:nth-of-type(3)');//单价
+				var subTotal = trs[n].querySelector('td:nth-of-type(5)'); //小计
+				var num = 0;//已选商品的数量
+				//加的功能
+				spans[1].onclick = function(){
+					/**
+						点击后要做的事情：
+						1、商品的数量要累加
+						2、小计的值要累加
+						3、改变下面tfoot标签里面的内容
+					*/
+					num++;
+					strong.innerHTML = num; //数量改变
+					subTotal.innerHTML = parseFloat(price.innerHTML) * num +'.00元';
+					sum();
+				}
+				//减的功能
+				spans[0].onclick = function(){
+					num--;
+					if(num<0){
+						num = 0;
+					}
+					strong.innerHTML = num;
+					subTotal.innerHTML = parseFloat(price.innerHTML) * num +'.00元';
+					sum();
+				}
+			}
+			//求和功能 得到应付总额和最贵的
+			function sum(){
+				/*
+				* 这个函数需要做的事情
+				* 	1、算出一共多少钱
+				* 	2、算出最贵的
+				*/
+				var td = document.querySelectorAll('tfoot td')[1];
+				var expensive = 0;//最贵的价格
+				var total = 0;   //总价
+
+				for(var i=0;i<trs.length;i++){
+					var selectNum = trs[i].querySelector('strong').innerHTML;  //已选数量
+					var price = trs[i].querySelector('td:nth-of-type(3)').innerHTML;//单价
+					var subTotal = trs[i].querySelector('td:nth-of-type(5)').innerHTML;//小计
+					total += parseFloat(subTotal);
+					if(selectNum>0){
+						if(expensive<parseFloat(price)){
+							expensive = parseFloat(price);
+						}
+					}
+				}
+				td.innerHTML = '<p>应付总额：<strong>'+total+'</strong></p><p>最贵的商品为：'+expensive+'.00元</p>';
+			}
+		</script>
+</body>
+</html>

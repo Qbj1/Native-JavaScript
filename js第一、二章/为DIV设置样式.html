@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>为DIV设置样式</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    /* s-.box */
+    .box{
+      margin: 30px;
+    }
+    .box p{
+      font: bold 25px/50px '微软雅黑';
+      color: #000;
+    }
+    .box p a{
+      text-decoration: none;
+      display: inline-block;
+      width: 100px;
+      font: 18px/35px '微软雅黑';
+      color: #fff;
+      text-align:center;
+      background-color: #f00;
+    }
+    .box .div{
+      width: 100px;
+      height: 100px;
+      border: 10px solid #ff9900;
+      margin: 30px;
+      transition: .5s;
+    }
+    /* e-.box */
+    /* s-.set */
+    .set{
+      width: 100%;
+      height: 635px;
+      background: rgba(206, 215, 203, 0.5);
+      position: absolute;
+      top: 0;left: 0;
+      display: none;
+    }
+    .set .select{
+      width: 300px;
+      border: 10px solid #b3ccc7;
+      margin: 200px auto;
+      padding: 10px;
+    }
+    .set .select p{
+      font:16px/30px '微软雅黑';
+      color: #009933;
+    }
+    .set .select p a{
+      text-decoration: none;
+      display: inline-block;
+      width: 40px;
+      height: 30px;
+      border: 1px solid #ccc;
+      text-align: center;
+      margin: 5px;
+      font: 16px/30px '微软雅黑';
+      color:#000;
+      background-color: #c4bcbc;
+    }
+    #btn{
+      display: flex;
+      justify-content:flex-end;
+      margin-top: 10px;
+    }
+    #btn a{
+      text-decoration: none;
+      display: inline-block;
+      width: 50px;
+      text-align: center;
+      font: 16px/30px '微软雅黑';
+      color: #fff;
+      background-color:#009933;
+      margin-right: 20px;
+    }
+  </style>
+  <script>
+    window.onload=function(){
+      var set=document.querySelector('.box p a');
+      var popup=document.querySelector('.set');
+      var div=document.querySelector('.box .div');
+      var as=document.querySelectorAll('#btn a');
+      //点击设置事件
+      set.onclick=function(){
+        popup.style.display='block';
+      }
+      //确定和重置按钮事件
+      as[0].onclick=function(){
+        div.style.width=100+'px';
+        div.style.height=100+'px';
+      }
+      as[1].onclick=function(){
+        popup.style.display='none';
+      }
+      //选择颜色
+     var bg=document.querySelectorAll('#bg a');
+     bg[0].onclick=function(){
+       div.style.background='red';
+     }
+     bg[1].onclick=function(){
+       div.style.background='green';
+     }
+     bg[2].onclick=function(){
+       div.style.background='blue';
+     }
+     //设置宽度
+     var w=document.querySelectorAll('#w a');
+     w[0].onclick=function(){
+       div.style.width=200+'px';
+     }
+     w[1].onclick=function(){
+       div.style.width=300+'px';
+     }
+     w[2].onclick=function(){
+       div.style.width=400+'px';
+     }
+     //设置高度
+     var h=document.querySelectorAll('#h a');
+     h[0].onclick=function(){
+       div.style.height=200+'px';
+     }
+     h[1].onclick=function(){
+       div.style.height=300+'px';
+     }
+     h[2].onclick=function(){
+       div.style.height=400+'px';
+     }
+    }
+  </script>
+</head>
+<body>
+  <div class="box">
+    <p>请为下面DIV设置样式：<a href="#">点击设置</a></p>
+    <div class="div"></div>
+  </div>
+  <div class="set">
+    <div class="select">
+      <p id="bg">请选择背景色：
+        <a href="#" style="background:red;color:#fff">红</a>
+        <a href="#" style="background:green;color:#fff">绿</a>
+        <a href="#" style="background:blue;color:#fff">蓝</a>
+      </p>
+      <p id="w">请选择宽(px)：&nbsp;
+        <a href="#">200</a>
+        <a href="#">300</a>
+        <a href="#">400</a>
+      </p>
+      <p id="h">请选择高(px)：&nbsp;
+        <a href="#">200</a>
+        <a href="#">300</a>
+        <a href="#">400</a>
+      </p>
+      <div id="btn">
+        <a href="#">重置</a>
+        <a href="#">确定</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

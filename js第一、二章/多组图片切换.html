@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+				text-decoration: none;
+				list-style: none;
+			}
+
+			body {
+				background:#ddd;
+			}
+
+			#header {
+				background: #1e90ff;
+				text-align: center;
+				height: 50px;
+				line-height: 50px;
+			}
+
+			#header a {
+				color: #fff;
+				margin: 0 20px;
+				font: bold 15px/30px "微软雅黑";
+				padding: 0 30px;
+				border-radius: 30px;
+				display: inline-block;
+				background: #fff;
+				color: #e7a510;
+			}
+
+			#contact {
+				margin: 20px auto;
+				padding: 30px 15px;
+				width: 975px;
+				height: 470px;
+				background: #fff;
+				display: flex;
+				justify-content: space-around;
+			}
+
+			#imgLeft {
+				width: 630px;
+				height: 420px;
+			}
+
+			#imgRight {
+				width: 280px;
+				height: 420px;
+			}
+
+			#img1 {
+				width: 630px;
+				height: 420px;
+				display: block;
+				border: 1px solid #ccc;
+			}
+
+			#img2 {
+				width: 280px;
+				height: 420px;
+				display: block;
+				border: 1px solid #ccc;
+			}
+			p{
+				border-radius:10px;
+				background:#1e90ff;
+				color:#fff;
+				margin-top:10px;
+				line-height: 32px;
+				}
+		</style>
+		<script type="text/javascript">
+			/*函数传参实现多组图片切换
+			 * 重用代码
+			 * 1、尽量保证html代码结构一致，可以通过父级选取子元素
+			 * 2、把核心主程序实现，用函数包起来
+			 * 3、把每组里不同的值找出来通过传参实现
+			 */
+
+			window.onload=function(){
+				var as=document.getElementsByTagName('a');
+				var aimg1=['img/1.png','img/2.png','img/3.png','img/4.png'];
+				var aimg2=['img/5.png','img/6.png','img/7.png'];
+				var img1=document.getElementById('img1');
+				var img2=document.getElementById('img2');
+				var p1=document.querySelector('#imgleft p');
+				var span1=document.querySelector('#imgleft span');
+				var p2=document.querySelector('#imgright p');
+				var span2=document.querySelector('#imgright span');
+				//图片切换函数
+				var num=0;
+				var n=0;
+				function tab1(){
+					img1.src=aimg1[num];
+					p1.innerHTML='第一组第'+(num+1)+'张';
+					span1.innerHTML=num+1+'/'+aimg1.length;
+
+				}
+				tab1(0);
+				function tab2(){
+					img2.src=aimg2[n];
+					p2.innerHTML='第二组第'+(n+1)+'张';
+					span2.innerHTML=n+1+'/'+aimg2.length;
+				}
+				tab2();
+				as[0].onclick=function(){
+					num--;
+					n--;
+					if(num==-1){
+						num=aimg1.length-1;
+					}
+					tab1();
+					if(n==-1){
+						n=aimg2.length-1;
+					}
+					tab2();
+				}
+
+				as[1].onclick=function(){
+					num++;
+					n++;
+					if(num==aimg1.length){
+						num=0;
+					}
+					tab1();
+					if(n==aimg2.length){
+						n=0;
+					}
+					tab2();
+				}
+
+				img1.onclick=function(){
+					num++;
+					if(num==aimg1.length){
+					num=0;
+					}
+					tab1();
+				}
+
+				img2.onclick=function(){
+					n++;
+					if(n==aimg2.length){
+					n=0;
+					}
+					tab2();
+				}
+
+			}
+		</script>
+	</head>
+	<body>
+		<div id="header">
+			<a href="#" id="prev">上一组</a>
+			<a href="#" id="next">下一组</a>
+		</div>
+		<div id="contact">
+			<div id="imgleft">
+				<img id="img1" src="img/1.png" alt="图片加载中"/>
+				<p style="text-indent: 300px;">文字加载中</p>
+				<span>数量加载中</span>
+			</div>
+			<div id="imgright">
+				<img id="img2" src="img/5.png" alt="图片加载中"/>
+				<p style="text-indent: 100px;">文字加载中</p>
+				<span>数量加载中</span>
+			</div>
+		</div>
+		<!-- <script type="text/javascript">
+			var as=document.getElementsByTagName('a');//获取到上一组，下一组按钮
+			var img1=document.getElementById('img1');
+			var img2=document.getElementById('img2');
+			var p=document.getElementsByTagName('p');
+			var span=document.getElementsByTagName('span');
+			var aimg1=['img/1.png','img/2.png','img/3.png','img/4.png'];//用数组存放第一组的图片
+			var aimg2=['img/5.png','img/6.png','img/7.png']; //用数组存放第二组的图片
+			//初始化
+			var num=0;
+			var n=0;
+			//上一组点击
+			as[0].onclick=function(){
+				num--;
+				n--;
+				if(num==-1){
+					num=aimg1.length-1;
+				}
+				if(n==-1){
+					n=aimg2.length-1;
+				}
+				tab1();
+				tab2();
+			}
+			//下一组点击
+			as[1].onclick=function(){
+				num++;
+				n++;
+				if(num==aimg1.length){
+					num=0;
+				}
+				if(n==aimg2.length){
+					n=0;
+				}
+				tab1();
+				tab2();
+			}
+			//点击图片切换
+			img1.onclick=function(){
+				num++;
+				if(num==aimg1.length){
+					num=0;
+				};
+				tab1();
+			}
+			img2.onclick=function(){
+				n++;
+				if(n==aimg2.length){
+					n=0;
+				}
+				tab2();
+			}
+			//左侧图片切换函数
+			function tab1(){
+				img1.src=aimg1[num];
+				p[0].innerHTML='第一组第'+(num+1)+'张';
+				span[0].innerHTML=(num+1)+'/'+aimg1.length;
+			}
+			tab1();
+			//右侧图片切换函数
+			function tab2(){
+				img2.src=aimg2[n];
+				p[1].innerHTML='第二组第'+(n+1)+'张';
+				span[1].innerHTML=(n+1)+'/'+aimg2.length;
+			}
+			tab2();
+		</script> -->
+	</body>
+</html>
