@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<!--
+			模板
+				html模板
+					基于DOM的模板，模板都是可解析的有效的html
+				插值
+					文本：使用"Mustache"语法(双大括号){{value}}
+							作用：替换实例上的属性值。当值改变时，插值内容处会自动更新
+					原生的html：双大括号输出的是文本，不会解析html
+					属性：使用v-bind绑定，可以响应变化
+					使用javascript表达式：写简单的表达式
+				template字符串
+					template选项对象的属性
+					模板将会替换挂载的元素，挂载元素的内容都将被忽略
+					根节点只能有一个
+					将html结构写在一对script标签中，设置type="x-template"
+		-->
+		<script src="js/vue.js"></script>
+		<!--模板-->
+		<div id="demo" :custom="abc">
+			{{true?"yes":"no"}}
+			<div v-html="html"></div>
+		</div>
+		<!--字符串模板-->
+		
+		<script type="text/javascript">
+			//数据
+			let obj={
+				html:"<div>Hello,Vue!</div>",
+				abc:1
+			}
+			var str='<div>hello,{{abc}}</div>'
+			var vm=new Vue({
+				el:"#demo",
+				data:obj,
+				template:str
+			});
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			#box{
+				width: 730px;
+				height: 454px;
+				margin: 30px auto;
+				position: relative;
+				overflow: hidden;
+			}
+			#box ul{
+				position: absolute;
+				left: 0;
+			}
+			#box li{
+				list-style: none;
+				float: left;
+			}
+			img{
+				vertical-align: middle;
+				width: 730px;
+				height: 454px;
+			}
+			#box div{
+				position: absolute;
+				bottom: 0;
+				height: 70px;
+				width: 100%;
+				background: rgba(0,0,0,.5);
+				color: #fff;
+				text-indent: 20px;
+			}
+			#box div h3{
+				line-height: 40px;
+			}
+		</style>
+		<script src="js/move.js"></script>
+		<script type="text/javascript">
+			window.onload=function(){
+				var ul=document.querySelector("ul");
+				var div=document.querySelector("#box div");
+				var n=0;		//用来存储图片走的个数
+				var timer;
+				
+				var aText=[
+				{"title":'荣耀行刑官-德莱文',"content":'皮肤:金牌主播-德莱文'},
+				{"title":'黑暗之女-安妮',"content":'皮肤:甜心宝贝-安妮'},
+				{"title":'迅捷斥候-提莫',"content":'皮肤:熊猫-提莫'}
+				];
+				
+				//把ul的内容复制一份
+					ul.innerHTML+=ul.innerHTML;
+		
+				//算出ul的宽度
+					var lis=document.querySelectorAll("li");
+				//一个li的宽度
+					var w=parseInt(getComputedStyle(lis[0]).width);
+					ul.style.width=w*lis.length+'px';
+				
+				//把文字添加到图片上
+				div.innerHTML='<h3>'+aText[0].title+'</h3><p>'+aText[0].content+'</p>';
+				
+				//开启定时器，让图片不断的走
+				timer=setInterval(pic,5000);
+				
+				function pic(){
+					n++;  //调用一次函数表示图片走了一张
+					//让文字先运动到下面
+					move(div,{bottom:-70},1000,'linear',function(){
+						//文字运动完，接下来运动ul
+						move(ul,{left:-730*n},2000,'linear',function(){
+							if(n==lis.length/2){
+								//让n的值和li的下标值作对比，条件成立说明走到了复制的第一张（第四张）
+								ul.style.left=0;//把ul拉回来
+								n=0;//让n的值不再累加，和图片一致
+							}
+							//ul运动完，接下来让文字在上去，内容改变
+							move(div,{bottom:0},1000,'linear');
+							div.innerHTML='<h3>'+aText[n].title+'</h3><p>'+aText[n].content+'</p>';		
+						});
+					});
+				}
+		}
+		</script>
+		
+	</head>
+	<body>
+		<div id="box">
+			<ul>
+				<li><img src="img/1.png" alt="" /></li>
+				<li><img src="img/2.png" alt="" /></li>
+				<li><img src="img/3.png" alt="" /></li>
+			</ul>
+			<div>
+				<h3>1</h3>
+				<p>1</p>
+			</div>
+		</div>
+		<!--<div style="width:100px;background: green;">
+			<ul style="width: 500px;height: 100px;border:1px solid red"></ul>
+		</div>-->
+	</body>
+</html>

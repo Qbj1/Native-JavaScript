@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			[v-cloak]{
+				display:none;
+			}
+		</style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="wap" v-cloak>
+			{{msg}}
+			<p v-html="text"></p>
+			<a :href="path"></a>
+			<p v-if="show">显示</p>
+			<p v-else>隐藏</p>
+			<p v-show="isshow">展示</p>
+			<input type="text" v-model="msd" @keyup.esc="key"/><span>{{msd}}</span>
+			<ul>
+				<li v-for="(item,index) in arr">{{index+1}}::{{item}}</li>
+			</ul>
+			<button @click="doThis" @click.stop="stop">点击</button>
+			<a href="###" target="_blank" @click.prevent>跳转</a>
+			<hr />
+		</div>
+		<script>
+			var vm=new Vue({
+				el:"#wap",
+				data:{
+					msg:"hello Vue",
+					text:`<span>你好,Vue</span>`,
+					path:"#",
+					show:true,
+					isshow:true,
+					msd:'',
+					arr:['apple','banana','bela']
+				},
+				methods:{
+					doThis(){
+						alert('点击');
+					},
+					stop(ev){
+						ev.cancelBubble=true;
+					},
+					key(){
+						alert("你按下了esc键")
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

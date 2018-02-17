@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.exchange{
+				width: 100%;
+				height: 1800px;
+				background: url(images/bg_04.jpg) no-repeat center;
+			}
+			.exchange .goodsName {
+			    color: rgb(103, 103, 103);
+			    font: 25px/40px "微软雅黑";
+			}
+			ul{
+				width: 100%;
+				padding: 180px 30px 0 40px;
+				box-sizing: border-box;
+				position: relative;
+			}
+			ul li{
+				list-style: none;
+				display: inline-block;
+				margin-right: 35px;
+				margin-bottom: 30px;
+				text-align: center;
+				width: 378px;
+				height: 438px;
+				background: #fff;
+			}
+			ul li .goodPrice{
+				color: rgb(230, 65, 61);
+    			font: 22px/34px "微软雅黑";
+			}
+			ul li a{
+				text-decoration: none;
+				display: inline-block;
+				width: 205px;
+				font: 18px/40px "微软雅黑";
+				color: #fff;
+				background: #c11910;
+				margin-top: 14px;
+			}
+		</style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+	</head>
+	<body>
+		<div class="exchange">
+			<ul>
+				<li v-for="(item,index) in price">
+					<img :src="'images/'+item.pic" alt="" />
+					<p class="goodsName">{{item.text1}}</p>
+					<p class="goodPrice">{{item.text2}}</p>
+					<a href="javascript:;" class="exchangeBtn">立即兑换&nbsp;></a>
+				</li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+			var priceDate=[
+				{pic:'travel.jpg',text1:'马尔代夫5天游   ￥15000',text2:'吉祥币：2666个'},
+				{pic:'iphonex.jpg',text1:'iPhoneX ￥8388',text2:'吉祥币：1580个'},
+				{pic:'tv.jpg',text1:'小米超薄电视55寸  ￥4499',text2:'吉祥币：928个'},
+				{pic:'camera.jpg',text1:'佳能800D ￥5500',text2:'吉祥币968个'},
+				{pic:'headset.jpg',text1:'苹果AirPods耳机  ￥1288',text2:'吉祥币:258个'},
+				{pic:'watch.jpg',text1:'DW手表 ￥1350',text2:'吉祥币:266个'},
+				{pic:'pad.jpg',text1:'9.7寸iPad ￥2699',text2:'吉祥币:500个'},
+				{pic:'phone.jpg',text1:'坚果pro2全面屏手机 ￥2000',text2:'吉祥币:368个'},
+				{pic:'cooker.jpg',text1:'小米智能电饭煲 ￥399',text2:'吉祥币：88个'}
+			];
+			new Vue({
+				el:".exchange",
+				data:{
+					price:priceDate
+				}
+			})
+		</script>
+	</body>
+</html>

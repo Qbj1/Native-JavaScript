@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#box{
+				width: 100px;
+				height: 100px;
+				background: #c78413;
+				position: absolute;
+				left: 500px;
+				top: 200px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+		<script type="text/javascript">
+			var box=document.getElementById('box');
+			var dir='';//记录鼠标样式
+			var isDown=false;//记录鼠标有没有按下
+			var msg=[];//记录盒子的信息
+			/*
+			 * 鼠标方向
+			 * 左		w-resize
+			 * 上		n-resize
+			 * 右		e-resize
+			 * 下		s-resize
+			 * 
+			 * 左上		nw-resize
+			 * 右上		ne-resize
+			 * 右下		se-resize
+			 * 左下		sw-resize 
+			 */	
+			//鼠标在box身上按下的时候记录一下盒子的信息
+			box.onmousedown=function(ev){
+				isDown=true;
+				msg={
+					x:ev.clientX,
+					y:ev.clientY,
+					w:getPos(this).width,
+					h:getPos(this).height,
+					t:getPos(this).top,
+					r:getPos(this).right,
+					b:getPos(this).bottom,
+					l:getPos(this).left
+				};
+				document.onmouseup=function(){
+					isDown=false;
+				}
+				document.onmousemove=function(ev){
+					/*
+					 * 在这里需要做两件事情
+					 * 	1、鼠标没有按下，改变鼠标的样式 
+					 * 	2、鼠标按下了，改变盒子的样式
+					 */
+					
+					if(!isDown){
+						//鼠标没有按下
+						/*
+						 * 1、判断的顺序不能变
+						 * 2、判断要用if
+						 */
+						box.style.cursor='auto'; //在盒子中间的时候，让鼠标变成自动的
+						dir='';
+						//上
+						if(ev.clientY<getPos(box).top+10){
+							dir+='n';
+						}
+						//下
+						if(ev.clientY>getPos(box).bottom-10){
+							dir += 's';
+						}	
+						//左
+						if(ev.clientX<getPos(box).left+10){
+							dir += 'w';
+						}
+						//右
+						if(ev.clientX >getPos(box).right-10){
+							dir += 'e';
+						}
+						box.style.cursor = dir+'-resize';
+					}else{//鼠标没有按下
+						//往右拖
+						if(dir.indexOf('e')!=-1){
+							/*字符串.indexOf()通过字符找下标，没找到返-1
+							!=比较两个值是不相同，不相同true，相同false*/
+							/*
+							 * 条件成立，说明往右拖
+							 * w=原来宽度+拖动距离
+							 */
+							var w=msg.w+ev.clientX-msg.x;
+							if(w<100){w=100}
+							box.style.width=w+'px';
+						}
+						//往下拖
+						if(dir.indexOf('s')!=-1){
+							var h=msg.h+ev.clientY-msg.y;
+							if(h<100){h=100}
+							box.style.height=h+'px';
+						}
+						//往左拖
+						if(dir.indexOf('w')!=-1){
+							/*
+							 * w=原来的宽度(msg.w)+拖动的距离(msg.x-ev.clientX)
+							 * l=原来的距离(msg.l)-拖动的距离(msg.x-ev.clientX)
+							 */
+							var w=msg.w+msg.x-ev.clientX;
+							var l=msg.l-(msg.x-ev.clientX);
+							if(w<100){w=100;l=msg.r-100;}
+							box.style.width=w+'px';
+							box.style.left=l+'px';
+						}
+						//往上拖
+						if(dir.indexOf('n')!=-1){
+							var h=msg.h+msg.y-ev.clientY;
+							var t=msg.t-(msg.y-ev.clientY);
+							if(h<100){h=100;t=msg.b-100;}
+							box.style.height=h+'px';
+							box.style.top=t+'px';
+						}
+						
+					}
+					
+				};
+			};	
+			function getPos(obj){
+				//方法返回元素的大小及其相对于视口的位置
+				return obj.getBoundingClientRect();
+			}
+		</script>
+	</body>
+</html>

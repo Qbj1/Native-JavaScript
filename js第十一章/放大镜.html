@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#small{
+				width: 300px;
+				height: 300px;
+				float: left;
+				position: relative;
+			}
+			#small img{
+				width: 300px;
+			}
+			#small div{
+				width: 100px;
+				height: 100px;
+				background: rgba(51,102,153,.5);
+				position: absolute;
+				top: 0;
+				left: 0;
+				cursor: move;
+				display: none;
+			}
+			#big{
+				width: 500px;
+				height: 500px;
+				float: left;
+				position: relative;
+				overflow: hidden;
+				display: none;
+			}
+			#big img{
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+		</style>
+		<script src="jquery-3.2.1.js"></script>
+		<script>
+			$(function(){
+				//给左边的框添加鼠标移入事件
+				var magnifier=$('#small div');
+				$('#small').mouseover(function(){
+					magnifier.css('display','block');
+					$('#big').css('display','block');
+				}).mouseout(function(){
+					magnifier.css('display','none');
+					$('#big').css('display','none');
+				}).mousemove(function(ev){
+					//鼠标位置在放大镜中心
+					//l:magnifier相对于#small左边的距离
+					//t：magnifier相对于#small上边的距离
+					var l=ev.clientX-$(this).offset().left-magnifier.width()/2;
+					var t=ev.clientY-$(this).offset().top-magnifier.height()/2;
+					//限制magnifier在x轴的移动范围
+					if(l<0){
+						l=0;
+					}else if(l>$(this).width()-magnifier.width()){
+						l=$(this).width()-magnifier.width();
+					}
+					//限制magnifier在y轴的移动范围
+					if(t<0){
+						t=0;
+					}else if(t>$(this).height()-magnifier.height()){
+						t=$(this).height()-magnifier.height();
+					}
+					magnifier.css({'left':l,'top':t});
+					//比例
+					var scaleX=l/($(this).width()-magnifier.width());
+					var scaleY=t/($(this).height()-magnifier.height());
+					$('#big img').css({
+						'left':scaleX*($('#big').width()-$('#big img').width()),
+						'top':scaleY*($('#big').height()-$('#big img').height())
+					});
+				});
+
+			});
+		</script>
+	</head>
+	<body>
+		<div id="small">
+			<img src="img/big.jpg"/>
+			<div></div>
+		</div>
+		<div id="big">
+			<img src="img/big.jpg"/>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.bg{
+				background: yellow;
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+			render函数
+				render 选项对象的属性
+				createElement(标签名,[数据对象],子元素);子元素为文本或数组
+		-->
+		<script src="js/vue.js"></script>
+		<!--模板-->
+		<div id="demo">
+			<span :class='{red:addClass}'>Hello,Vue!</span>
+		</div>
+		<script type="text/javascript">
+			//数据
+			let obj={
+				addClass:true
+			};
+			var vm=new Vue({
+				el:"#demo",
+				data:obj,
+				render(createElement){
+					var obj=createElement(
+						"ul",
+						{
+							class:{
+								//绑定class
+								bg:true
+							},
+							style:{
+								//绑定样式
+								fontSize:'50px'
+							},
+							attrs:{
+								//添加行间属性
+								abc:1
+							},
+							domProps:{
+								//DOM元素属性
+								//innerHTML:'<li>我是html</li>'
+							}
+						},
+						[
+							createElement("li",1),
+							createElement("li",2),
+							createElement("li",3)
+						]
+					);
+					console.log(obj);
+					return obj;
+				}
+			});
+		</script>
+	</body>
+</html>

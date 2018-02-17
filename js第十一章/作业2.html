@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body,p,h3{
+      margin: 0;
+    }
+    img{
+      vertical-align: middle;
+    }
+    #box{
+      width: 596px;
+      background: #000;
+      padding: 11px;
+      margin: 100px auto;
+      font-size: 0;
+    }
+    #box .box-wrap{
+      display: inline-block;
+      position: relative;
+    }
+    #box .box-wrap .content{
+      width: 224px;
+      height: 192px;
+      background: #313131;
+      float: right;
+      color:#fbf9f7;
+      box-sizing: border-box;
+      padding: 9px 0 0 12px;
+      margin-left: 3px;
+      display: none;
+    }
+    .content h3{
+      font: 22px/38px '微软雅黑';
+    }
+    .content p{
+      font: 12px/20px '微软雅黑';
+    }
+  </style>
+  <script src="jquery-3.2.1.js"></script>
+  <script>
+    $(function(){
+      $('img').eq(0).click(function(){
+        $('.content').css('display', 'none');
+        $('.content').eq(0).css('display', 'block');
+      });
+      $('img').eq(1).click(function(){
+          $('.content').css('display', 'none');
+          $('.content').eq(1).css('display','block');
+      });
+      $('img').eq(2).click(function(){
+          $('.content').css('display', 'none');
+        $('.content').eq(2).css('display','block');
+      });
+    });
+  </script>
+</head>
+<body>
+  <div id="box">
+    <div class="box-wrap">
+      <img src="img/t.png" alt="">
+      <div class="content">
+        <h3>认识讲师</h3>
+        <p>你看到的，你所认同的，在这里都将被实现，学习艰辛，我们一路前行</p>
+      </div>
+    </div>
+    <div class="box-wrap">
+      <img src="img/t.png" alt="">
+      <div class="content">
+        <h3>教学管理</h3>
+        <p>或许看上去不会那么友善，甚至略为苛刻，我们相信你也期待一个新的学习体验</p>
+      </div>
+    </div>
+    <div class="box-wrap">
+      <img src="img/t.png" alt="">
+      <div class="content">
+        <h3>学员反馈</h3>
+        <p>没有慷慨激昂的言语，甚至不连贯的语句也测证“剧本”的可信赖性。“简单可依赖”，不只是一句口号</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

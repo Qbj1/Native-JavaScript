@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Document</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			li {
+				list-style: none;
+			}
+			
+			body {
+				font-family: "微软雅黑";
+				background: #f1f1f1;
+			}
+			
+			#nav {
+				text-align: center;
+				margin: 50px 0 10px 10px;
+			}
+			
+			#nav a {
+				display: inline-block;
+				width: 116px;
+				height: 36px;
+				line-height: 36px;
+				text-align: center;
+				color: #fff;
+				font-size: 16px;
+				margin: 0 10px;
+				background: #009999;
+				text-decoration: none;
+				border: 1px solid #9c9c9c;
+			}
+			
+			#nav a.active {
+				background: #086BA5;
+			}
+			
+			#img {
+				width: 1208px;
+				margin: 0 auto;
+				position: relative;
+			}
+			
+			#img li {
+				width: 280px;
+				height: 223px;
+				border: 10px solid #fff;
+				margin: 0 1px;
+				position: absolute;
+				/* 动画效果需要用到定位属性 */
+			}
+			
+			#img li h3 {
+				height: 43px;
+				line-height: 43px;
+				color: #006699;
+				font-size: 18px;
+				text-align: center;
+				background: #f1f1f1;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="nav">
+			<a href="javascript:;">从大到小</a>
+			<a href="javascript:;">打乱顺序</a>
+		</div>
+		<ul id="img">
+			<li style="left: 1px;top: 0px;">
+				<img src="img/1.png" alt="" />
+				<h3>1-温馨办公</h3>
+			</li>
+			<li style="left: 303px;top: 0px;">
+				<img src="img/2.png" alt="" />
+				<h3>2-游戏桌面</h3>
+			</li>
+			<li style="left: 605px;top: 0;">
+				<img src="img/3.png" alt="" />
+				<h3>3-汽车摇滚</h3>
+			</li>
+			<li style="left: 907px;top: 0px;">
+				<img src="img/4.png" alt="" />
+				<h3>4-狭路相逢</h3>
+			</li>
+			<li style="left: 1px;top: 243px;">
+				<img src="img/5.png" alt="" />
+				<h3>5-棒球小子</h3>
+			</li>
+			<li style="left: 303px;top: 243px;">
+				<img src="img/6.png" alt="" />
+				<h3>6-球鞋动力</h3>
+			</li>
+			<li style="left: 605px;top: 243px;">
+				<img src="img/7.png" alt="" />
+				<h3>7-游戏官网</h3>
+			</li>
+			<li style="left: 907px;top: 243px;">
+				<img src="img/8.png" alt="" />
+				<h3>8-指尖社区</h3>
+			</li>
+		</ul>
+		<!--
+Math.round()  把一个数字四舍五入
+ 常用的一些随机取值方法
+  Math.random() * (max - min) + min; 任意范围的随机数
+    x ~ y : Math.round(Math.random()*(y-x) + x)
+    0 ~ x : Math.round(Math.random()*x)
+    1 ~ x : Math.ceil(Math.random()*x)||1
+    0 ~ x-1 : Math.floor(Math.random()*x)
+-->
+		<script src="js/move.js"></script>
+		<script>
+			var as = document.querySelectorAll('#nav a');
+			var lis = document.querySelectorAll('li');
+			var order = []; //从大到小或者从小到大对应的位置信息
+			var random = []; //随机排序的位置信息
+			for(var i = 0; i < lis.length; i++) {
+				order.push({
+					"left": getComputedStyle(lis[i]).left,
+					'top': getComputedStyle(lis[i]).top
+				});
+				random.push({
+					"left": getComputedStyle(lis[i]).left,
+					'top': getComputedStyle(lis[i]).top
+				});
+			}
+			// 从大到小
+			var n = 0;
+			as[0].onclick = function() {
+				n++;
+				this.innerHTML = n % 2 ? "从小到大" : "从大到小";
+				//让图片动起来
+				order.reverse();
+				toMove(order);
+			}
+			//打乱顺序
+			as[1].onclick = function() {
+				//给数组随机排序
+				random.sort(function() {
+					return 0.5 - Math.random();
+				});
+				toMove(random);
+			}
+
+			function toMove(arr) {
+				for(var i = 0; i < lis.length; i++) {
+					move(lis[i], {
+						left: parseFloat(arr[i].left),
+						top: parseFloat(arr[i].top)
+					}, 600, 'linear');
+				}
+			}
+		</script>
+		
+	</body>
+
+</html>

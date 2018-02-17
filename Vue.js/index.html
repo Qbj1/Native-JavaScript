@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			
+		</style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="demo">
+			<!--绑定style和class-->
+			<p :class="clo" :style="slo">绑定</p>
+			<button @click="change">消除</button>
+			<!--计算属性-->
+			<p>{{mes}}</p>
+			<p>{{reMes}}</p>
+			<!--过滤器-->
+			<p>原来的数据：{{message}}--{{mes}}</p>
+			<p>过滤后的数据：{{message | capitalize}}--{{mes | cut}}</p>
+		</div>
+		
+		<script type="text/javascript">
+			var vm=new Vue({
+				el:"#demo",
+				data:{
+					clo:{
+						active:true,
+						text:true
+					},
+					slo:{
+						padding:0,
+						color:"red",
+						font:"18px/40px '微软雅黑'"
+					},
+					mes:"Vue.js",
+					message:"javascript"
+				},
+				methods:{
+					change(){
+						this.slo.color="blue"
+					}
+				},
+				computed:{
+					//计算属性的getter
+					reMes(){
+						//this 指向vm实例
+						return this.mes.split('').reverse().join('')
+					}
+				},
+				filters:{
+					capitalize(val){
+						if(!val) return ''
+						val= val.toString()
+						return val.charAt(0).toUpperCase()+val.slice(1);
+					},
+					cut(val){
+						
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

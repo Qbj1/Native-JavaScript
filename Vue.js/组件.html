@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+	</head>
+	<body>
+		<div id="demo">
+			<m-header></m-header>
+			<m-nav></m-nav>
+		</div>
+		
+		<script src="js/vue.js"></script>
+		<script type="text/javascript">
+			//全局注册组件
+			Vue.component('m-header',{
+				template:'<p>全局组件</p>'
+			})
+			//局部注册组件
+			var child={
+				template:'<p>子组件</p>'
+			}
+			new Vue({
+				el:"#demo",
+				components:{
+					'm-nav':child
+				}
+			})
+		</script>
+	</body>
+</html>

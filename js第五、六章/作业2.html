@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			body{
+				margin: 0;
+			}
+			ul{
+				padding: 0;
+				list-style: none;
+				width: 400px;
+				margin: 100px auto;
+			}
+			ul li{
+				box-sizing: border-box;
+				width: 400px;
+				height: 50px;
+				background: #61a56c;
+				margin-bottom: 16px;
+				border-radius: 5px;
+				font: 18px/50px "微软雅黑";
+				color: #fff;
+				padding-left: 20px;
+				box-shadow: 3px 3px 5px #ccc;
+				position: relative;
+				top: 0;
+			}
+			ul li a{
+				text-decoration: none;
+				display: inline-block;
+				box-sizing: border-box;
+				width: 55px;
+				height: 30px;
+				border: 1px solid #fff;
+				float: right;
+				text-align: center;
+				margin: 10px 10px 10px 0;
+				font:13px/30px "微软雅黑";
+				color: #fff;
+			}
+			ul li a:hover{
+				background: #fff;
+				color: #61a56c;
+				}
+		</style>
+		
+	</head>
+	<body>
+		<ul>
+			<li>
+				red
+				<a href="#">下移</a>
+				<a href="#">上移</a>
+			</li>
+			<li>
+				green
+				<a href="#">下移</a>
+				<a href="#">上移</a>
+			</li>
+			<li>
+				blue
+				<a href="#">下移</a>
+				<a href="#">上移</a>
+			</li>
+			<li>
+				yellow
+				<a href="#">下移</a>
+				<a href="#">上移</a>
+			</li>
+		</ul>
+		<script src="../js第四章/js/move.js"></script>
+		<script type="text/javascript">
+			/*手机号  012****789
+			 * var a='0123456789';
+			 * var h=a.substr(3,4);
+			 * h='****';
+			 * a='012'+h+'789';
+			 * console.log(a);
+			 */
+			var ul=document.querySelector('ul');
+			var lis=document.querySelectorAll('ul li');
+			var h=lis[0].offsetHeight;//得到li元素的高度
+			for(var i=0;i<lis.length;i++){
+				var up=lis[i].children[1];//上移
+				var down=lis[i].children[0];//下移
+				up.onclick=function(){
+					var now=this.parentNode;//当前元素得父节点
+					var prev=now.previousElementSibling;//找到上一个兄弟节点
+					if(!prev){
+						alert('到顶了');
+						return;
+					}
+					move(now,{top:-h},200,'linear',recover);
+					move(prev,{top:h},200,'linear',recover);
+					/*
+					 * 注意，在使用相对定位时，无论是否进行移动，元素仍然占据原来
+					 * 的空间。因此，移动元素会导致它覆盖其它框。
+					 */
+					function recover(){
+						ul.insertBefore(now,prev);
+						now.style.top=0;
+						prev.style.top=0;
+					}
+				};
+				down.onclick=function(){
+					var now=this.parentNode;//当前元素得父节点
+					var next=now.nextElementSibling;//找到下一个兄弟节点
+					if(!next){
+						alert('到底了');
+						return;
+					}
+					move(now,{top:h},200,'linear',recover);
+					move(next,{top:-h},200,'linear',recover);
+					function recover(){
+						ul.insertBefore(now,next);
+						now.style.top=0;
+						next.style.top=0;
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

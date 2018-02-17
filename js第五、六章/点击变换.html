@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			body{margin: 0;}
+			ul{padding: 0;margin: 0;}
+			input{
+				padding: 0;
+				width:50px;
+				height:30px;
+				margin-right: 31px;
+				}
+			input:last-of-type{
+				margin-right: 0;
+			}	
+			div{
+				box-sizing: border-box;
+				width: 310px;
+				border: 1px solid #000;
+				margin: 20px auto;
+			}
+			ul li{
+				list-style: none;
+				height: 100px;
+				background: #f00;
+				margin-bottom: 10px;
+			}
+			ul li:nth-last-child(1){margin-bottom:0}
+			li.active{
+				background-color:#adff2f;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<input type="button" value="上一个"/>
+			<input type="button" value="下一个"/>
+			<input type="button" value="到顶部"/>
+			<input type="button" value="到底部"/>
+			<ul>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+			var inputs=document.querySelectorAll('input');
+			var ul=document.querySelector('ul');
+			var lis=document.querySelectorAll('ul li');
+			var now=lis[0];//存放当前元素的变量
+			inputs[0].onclick=function(){//上一个
+				now.className='';//当前的
+				var pre=now.previousElementSibling;//找到上一个兄弟节点
+				if(!pre){//到顶了让pre=最后一个li
+					pre=ul.lastElementChild;
+				}
+				pre.className='active';
+				now=pre;//把pre更新成当前的
+			}
+			inputs[1].onclick=function(){//下一个
+				now.className='';//当前的
+				var next=now.nextElementSibling;//找到上一个兄弟节点
+				if(!next){//到顶了让pre=最后一个li
+					next=ul.firstElementChild;
+				}
+				next.className='active';
+				now=next;//把next更新成当前的
+			}
+			inputs[2].onclick=function(){//到顶部
+				now.className='';
+				var first=ul.firstElementChild;
+				first.className='active';
+				now=first;//把first更新成当前的
+			}
+			inputs[3].onclick=function(){//到底部
+				now.className='';
+				var last=ul.lastElementChild;//最后一个li
+				last.className='active';
+				now=last;//把last更新成当前的
+			}
+		</script>
+	</body>
+</html>

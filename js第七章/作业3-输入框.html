@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+          input{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #box{
+            width: 500px;
+            margin: 100px auto 0;
+        }
+        #box input{
+        	width: 498px;
+        	line-height: 30px;
+        	font-size: 14px;
+        	border: 1px solid #ccc;
+        }
+        #list{
+        	display: none;
+        }
+        #list li{
+        	background: #009999;
+            margin-top: 3px;
+            line-height: 30px;
+            color: #fff;
+        }
+        #list li:hover{
+        	background: #00FF99;
+        }
+        #list li.active{
+            background: #60625b;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <input type="text"/>
+        <ul id="list">
+        </ul>
+    </div>
+    <script>
+        var book=['《第七个读者》','《心理罪 画像》','《心理罪 教化场》','《心理罪 暗河》','《心理罪 城市之光》','《地球往事》','《黑暗森林》','《死神永生》','《乡村教师》','《地球大炮》'];
+        var input = document.querySelector('input');
+        var list = document.getElementById('list');
+        var lis = document.getElementsByTagName('li');
+        var last = null;  //上一个点击的li
+        var cn = 1;
+        //生成元素
+        function createData(arr){
+            list.innerHTML = '';
+            for(var i=0;i<arr.length;i++){
+                var li = document.createElement('li');
+                li.innerHTML = arr[i];
+                li.index = i;
+                li.onclick = listClick;
+                list.appendChild(li);
+            }
+        };
+        createData(book);
+        //
+        input.onclick = function(ev){
+             list.style.display = 'block';
+             ev.cancelBubble = true;   //阻止冒泡
+        }
+        document.onclick = function(){
+            list.style.display  = 'none';
+        }
+        //li标签点击事件
+        function listClick(){
+            //这里面的this指的是点击的那个li
+            /**
+                如果点击的li没有class ，给他加上，同时把上一个class去掉
+                如果点击的li有class,把自己的class去掉
+            */
+            if(last &&　last != this){
+                last.className = '';
+            }
+            if(this.className==''){
+                //这个条件成立说明在点的li没有class，那就给加上
+                this.className =  'active';
+                input.value = this.innerHTML;
+                last = this;
+                cn = this.index;
+            }else{
+                //这个条件成立，说明li有class，把自己身上的class去掉
+                this.className = '';
+                input.value = '';
+                cn = -1; //当用户点击的是上一个选中的，这个时候把自己身上的class取消了，
+            }
+        }
+         //输入框的搜索功能，这里只能用oninput事件 ，不要用keydown
+         input.oninput = function(){
+                var str = this.value;
+                var newData = [];
+                //根据输入的内容去数组里找对应的数据，然后生成新的li
+                for(var i=0;i<book.length;i++){
+                    if(book[i].indexOf(str)!=-1){
+                        newData.push(book[i]);
+                    }
+                }
+                createData(newData);
+                list.style.display = 'block'; //按完回车键，然后再按删除键之后，ul的内容就不会显示出来了
+                cn = -1;//当删除内容的时候，如果删除前cn有值，删除后的话再按上下键就会出现问题，把cn的值还原成初始值就可以
+        }
+        document.onkeydown =  function(ev){
+            switch(ev.keyCode){
+                case 13:  //回车
+                    var dis = getComputedStyle(list).display;
+                    list.style.display = dis == 'block'?'none':'block';
+                    break;
+                case 38:  //上
+                    list.style.display = 'block';
+                    cn--;
+                    //边界判断
+                    if(cn<0){
+                        cn = lis.length - 1;
+                    }
+                    if(last){
+                        last.className = '';
+                    }
+                    lis[cn].className = 'active';
+                    input.value = lis[cn].innerHTML;
+                    last = lis[cn];
+                    break;
+                case 40:  //下
+                    list.style.display = 'block';
+                    cn++;
+                    //边界判断
+                    if(cn == lis.length){
+                        cn = 0;
+                    }
+                    if(last){
+                        last.className = '';
+                    }
+                    lis[cn].className = 'active';
+                    input.value = lis[cn].innerHTML;
+                    last = lis[cn];
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>

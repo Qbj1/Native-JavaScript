@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			body{
+				margin: 0;
+			}
+			div{
+				width: 100px;
+				height: 100px;
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+			#div1{				
+				background: red;
+			}
+			#div2{
+				background: yellow;
+				left: 100px;
+			}
+		</style>
+		<script type="text/javascript">
+			/*拖拽的原理
+			 * 	1、鼠标在元素身上按下
+			 * 		这里需要算出鼠标点击的地方离元素边界的距离
+			 * 		鼠标起始X轴的位置＝鼠标的clientX-元素的offsetLeft
+			 * 		鼠标起始Y轴的位置＝鼠标的clientY-元素的offsetTop
+			 * 
+			 * 	2、鼠标移动
+			 * 		这里需要算出来元素的真正left与top值
+			 * 		元素的left＝鼠标的clientX-鼠标起始X轴的位置
+			 * 		元素的top＝鼠标的clientY-鼠标起始Y轴的位置
+			 * 
+			 * 	3、鼠标抬起
+			 * 		清除掉鼠标身上的事件
+			 */
+			
+			/*面向对象的写法
+			 * function 构造函数(){
+				this.属性＝??;
+			}
+			构造函数.prototype.方法=function(){}
+			
+			var 实例对象=new 构造函数();
+			实例对象.方法();*/
+			window.onload=function(){
+				var div1=new Drag('div1');
+				var div2=new LimitDrag('div2');
+			};
+			//构造函数
+			function Drag(obj){
+				this.obj=document.getElementById(obj);
+				this.disX=0;
+				this.disY=0;
+				
+				var This=this;
+				this.obj.onmousedown=function(ev){
+					This.down(ev);
+				};
+			}
+			//构造函数Drag 原型(prototype) 身上的down方法
+			Drag.prototype.down=function(ev){
+				this.disX=ev.clientX-this.obj.offsetLeft;
+				this.disY=ev.clientY-this.obj.offsetTop;
+				
+				var This=this;
+				
+				document.onmousemove=function(ev){
+					This.move(ev);
+				};
+				document.onmouseup=this.up;
+				return false;
+			};
+			//构造函数Drag 原型(prototype) 身上的move方法
+			Drag.prototype.move=function(ev){
+				this.obj.style.left=ev.clientX-this.disX+'px';
+				this.obj.style.top=ev.clientY-this.disY+'px';
+			};
+			//构造函数Drag 原型(prototype) 身上的up方法
+			Drag.prototype.up=function(){
+				document.onmousemove=null;
+			};
+
+
+			//限制范围的拖拽，需要继承上面的功能
+			/*call  方法
+			 * 语法：call([thisObj,arg1, arg2...)
+			 * 定义: 调用函数并且改变this指向
+			 * 参数：thisObj       函数中this指向的值
+			 * 		 arg1,arg2...  从call第二个参数开始,都是真正
+			 * 					      函数里的参数
+			 * 		如果没有提供 thisObj 参数，那么 Global 对象被
+			 * 		用作 thisObj。
+			 */
+			function LimitDrag(obj){
+				//继承上面的属性
+				Drag.call(this,obj);
+			}
+			
+			//继承上面的方法
+			/* for...in 语句用于遍历数组或者对象的属性（对数组或者
+			 * 			对象的属性进行循环操作）。
+			 * 语法：for (变量 in 对象){
+			 *			在此执行代码
+			 *		  }  
+			 *	“变量”用来指定变量，指定的变量可以是数组元素，也可
+			 * 	以是对象的属性。		
+			 */
+			for(var attr in Drag.prototype){
+				LimitDrag.prototype[attr]=Drag.prototype[attr];
+			}
+			
+			LimitDrag.prototype.move=function(ev){
+				var l=ev.clientX-this.disX;
+				var t=ev.clientY-this.disY;
+				var w=document.documentElement.clientWidth-this.obj.offsetWidth;
+				var h=document.documentElement.clientHeight-this.obj.offsetHeight;
+				
+				if(l<0){
+					l=0;
+				}else if(l>w){
+					l=w;
+				}
+				
+				if(t<0){
+					t=0;
+				}else if(t>h){
+					t=h;
+				}
+				this.obj.style.left=l+'px';
+				this.obj.style.top=t+'px';
+			}
+		</script>
+	</head>
+	<body>
+		<div id="div1"></div>
+		<div id="div2"></div>		
+	</body>
+</html>

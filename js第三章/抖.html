@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			img{
+				width: 300px;
+				height: 300px;
+				position: absolute;
+				top: 100px;
+				left: 300px;
+			}
+		</style>
+	</head>
+	<body>
+		<img src="img/1.png" alt="" />
+		<script src="js/move.js"></script>
+		<script type="text/javascript">
+			/*抖动原理
+			 * 改变元素的左和上的定位距离
+			 */
+			var img=document.querySelector('img');
+			img.onclick=function(){
+				var posL=parseFloat(getComputedStyle(img).left);
+				var posT=parseFloat(getComputedStyle(img).top);
+				var arr=[];//20,-20,18,-18...
+				var num=0;//对应数组下标
+				var timer=null;
+				for(var i=20;i>-1;i-=2){
+					arr.push(i,-i);
+				}
+				clearInterval(timer);
+				timer=setInterval(d,100);
+				function d(){
+					move(img,{left:posL+arr[num],top:posT+arr[num]},50,'linear');
+					num++;
+					if(num==arr.length){
+						clearInterval(timer);
+					}
+				}		
+			}
+		</script>
+	</body>
+</html>

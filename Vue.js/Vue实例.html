@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<!--
+			Vue实例
+				每一个应用都是通过Vue这个构造函数创建根实例(root instance)启动
+				new Vue(选项对象)
+			需要传入选项对象，对象包含挂载元素，数据，模板，方法等。
+				el:挂载元素选择器		String|HtmlElement
+				data:代理数据			Object|Function
+				methods:定义方法		Object
+		-->
+		<!--模板-->
+		<div id="demo">
+			<span v-on:click="clickHandle">{{ message }}</span>
+		</div>
+		<script type="text/javascript">
+			//数据
+			let obj={
+				message:"hello,Vue!"
+			}
+			
+			var vm=new Vue({
+				el:"#demo",
+				data:obj,
+				methods:{
+					clickHandle(){
+						alert('click')
+					}
+				}
+			});
+			console.log(vm.$data);
+		</script>
+	</body>
+</html>

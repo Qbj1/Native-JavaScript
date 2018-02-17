@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="demo">
+			<p>{{total}}</p>
+			<btn @add="addTotal"></btn>
+			<hr />
+			父组件：<input type="text" v-model="message"/><span>{{message}}</span>
+			<child @send="getMsg" :msg="message"></child>
+		</div>
+		<script src="js/vue.js"></script>
+		<script type="text/javascript">
+			//全局组件
+			Vue.component('btn',{
+				template:'<button @click="change">{{n}}</button>',
+				data(){
+					return {n:0}
+				},
+				methods:{
+					change(){
+						this.n++;
+						this.$emit('add')
+					}
+				}
+			})
+			
+			var child={
+				template:"<div><span>子组件：</span><input @keyup='sendMsg' v-model='msg'/></div>",
+				props:['msg'],
+				methods:{
+					sendMsg(){
+						this.$emit('send',this.msg);//添加一个自定义事件send，并且传递参数
+					}
+				}
+			}
+			new Vue({
+				el:"#demo",
+				data:{
+					total:0,
+					message:''
+				},
+				methods:{
+					addTotal(){
+						this.total++
+					},
+					getMsg(msg){//通过msg参数 接收到了子组件传递过来的数据
+						this.message=msg //把接收到的数据赋值给父组件的message属性
+					}
+				},
+				components:{
+					'child':child
+				}
+			})
+		</script>
+	</body>
+</html>

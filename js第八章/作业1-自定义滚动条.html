@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#box{
+				width: 400px;
+				margin: 50px auto;
+				overflow: hidden;
+				box-shadow: 0 0 20px #333;
+			}
+			#text{
+				width: 380px;
+				height: 500px;
+				overflow: hidden;
+				position: relative;
+				line-height: 26px;
+				float: left;
+			}
+			#text div{
+				padding: 20px;
+				position: absolute;
+				top: 0;
+			}
+			#bar{
+				width: 20px;
+				height: 500px;
+				float: right;
+				position: relative;
+			}
+			#bar span{
+				width: 100%;
+				height: 20px;
+				background: #ccc;
+				display: block;
+				position: relative;
+				background: linear-gradient(#d1d1d1,#afb0af);
+				border-radius: 10px 10px 0 0;
+				cursor: default;
+			}
+			#bar span:first-child:before{
+				content: '';
+				position: absolute;
+				top: 0;left: 3px;
+				margin: auto;
+				width:0;height: 0;
+				border-width: 7px;
+				border-style: solid;
+				border-color: transparent transparent #fff;
+			}
+			#bar span:first-child.active{
+				 background: linear-gradient(rgba(179, 179, 179, 0.8), rgba(128, 128, 128, 0.8));
+			}
+			#bar span:last-child:before{
+				content: '';
+				position: absolute;
+				top: 5px;
+				left: 3px;
+				margin: auto;
+				
+				width: 0;
+				height: 0;
+				border-width: 7px;
+				border-style: solid;
+				border-color: #fff transparent transparent;
+				margin-bottom: 3px;
+			}
+			#bar span:last-child{
+				border-radius: 0 0 10px 10px;
+			}
+			#bar span:last-child.active{
+				 background: linear-gradient(rgba(179, 179, 179, 0.8), rgba(128, 128, 128, 0.8));
+			}
+			#bar>div{
+				width: 100%;
+				height: 460px;
+				position: relative;/*js找元素最上边用到*/
+				background: rgba(153, 153, 153, 0.3);
+			}
+			.slide{
+				width: 100%;
+				height: 86px;
+				position: absolute;
+				top: 0;left: 0;
+				background: linear-gradient(#82d1ff,#389dff);/*渐变*/
+				box-shadow: 0 5px 5px #888;
+			}
+			.slide:hover{
+				background: linear-gradient(#529bff, #026cff);
+			}
+			.slide.active{
+				background: linear-gradient(#026cff, #529bff);
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<!--文字区-->
+			<div id="text">
+				<div>
+					成长是一种必然的经历，也是一种必受的折磨。青春~张扬喜欢青春肆意挥霍的激情，喜欢青春无拘无束的浪漫心境，喜欢青春洁白无瑕的美丽面容，喜欢青春孩子般阳光灿烂的笑脸，喜欢青春想哭就哭想笑就笑的疯狂岁月，喜欢青春拼搏无惧的年轻的心……青春的一切都那么美好，像清泉潺潺划过心底，清净了渐渐烦乱的心，像几十年的佳酿，芳香甘醇地醉人~也许青春中不止有阳光，还有阴霾。月有阴晴圆缺，人有悲欢离合，细想一下，不完美或许更完美。青春中充斥着希望也有彷徨。踏入最张狂的年纪，我们多少会怀着憧憬，怀着梦想，希翼未来。或许拿出多数的时间埋头在书本中，那并不枯燥，因为你有一颗追逐的心，心中满了，总是不孤单。偶尔丛书本中抬一下头，扫过窗外的绿树繁花，清流碧湖。想起梦中的甜美，漾起甜甜的笑靥，总会对自己说一句话：我相信，梦里到达的地方，总有一天，脚步也能到达。你焚烧着青春，和同伴一起并肩奔跑，汗水有过，泪水也不会少，这样疯狂的青春很美，对吧！当然竞争无处不在，总是不甘落于人后，这便是动力。好吧！也许竞争中有失败有挫折，也许会留下阴影，留下孤单的心境。窗外淅淅沥沥的小雨，仿佛诉说着你糟糕的心情—阴暗晦涩的内心。偷偷地躲在被窝里，悄悄地藏在墙角边，眼角流下的泪诉说着你的不甘，诉说着你的委屈。此时，该如何？放弃？会吗？请告诉自己，青春的泪水最值得留念，因为它是你成长路上的最深刻的印迹，迈向更高台阶的垫脚石。青春不怕哭泣，不怕失败，青春就是资本，从泥沼中爬起来，流着泪奔跑，甩去一切的烦恼，坚持下去，前方等待你的就是光明。青春～寂寞不知道你们有没有感到孤单寂寞的时候。有时候，我会突然感到怎么没有人理解自己，没有真正的朋友呢？尤其是到了一个陌生的环境，陌生的一切，总是让心害怕，孤单，难受…亲爱的，没有人会陪你一辈子，所以你要学会适应孤独。即使是现在在你身边的恋人。记得【无怨的青春】中写到：在年轻的时候，如果你爱上一个人，请你，请你一定要温柔地对待他。不管你们相爱的时间有多长或多短，若你们能始终温柔得相待，那么，所有的时刻都将是一种无暇的美丽。所以呢，我们要学会适应孤单享受孤单。无可否认，空虚寂寞是一种折磨，在心灵憔悴下，学会沉淀下枯燥无趣的心，仔细品味此刻的感觉。你会发现寂寞也是一道青春的风景，灯光交错的夜，坐在台阶下，光影变幻，人流穿梭，目光迷离地盯着眼前飞逝的一切，站起身来，寂寞的心，甘甜带苦涩的滋味。这也许是青春激情燃放的一个小插曲。请细细品味，知道吗？一部影片中，许多人记住的也许不是前奏曲，不是片尾曲，而是那一瞬间的小插曲……
+				</div>
+			</div>
+			<!--滚动条-->
+			<div id="bar">
+				<span></span>
+				<div>
+					<div class="slide"></div>
+				</div>				
+				<span></span>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var box=document.getElementById('box');
+			var slide=document.querySelector('.slide');
+			var bar=document.getElementById('bar');
+			var slideWarp=bar.querySelector('div');
+			var text=document.getElementById('text');
+			var textCon=text.querySelector('div');
+			var btns=bar.querySelectorAll('span');
+			var timer=null;
+			
+			
+			var scrollTop=0;//滚动条走的距离
+			var maxHeight=slideWarp.offsetHeight-slide.offsetHeight;//滑块能走的最大距离
+			//滑块拖拽
+			slide.onmousedown=function(ev){
+				this.className='slide active';
+				var disY=ev.clientY-slide.offsetTop;//存上鼠标点击的y轴信息
+				document.onmousemove=function(ev){
+					scrollTop=ev.clientY-disY;
+					scroll();
+				}
+				document.onmouseup=function(){
+					slide.className='slide';
+					this.onmousemove=null;
+				}
+				ev.cancelBubble=true;//阻止时间冒泡
+				return false;//阻止浏览器默认行为
+			}			
+			//滚动条的主体内容
+			function scroll(){
+				if(scrollTop<0){
+					scrollTop=0;
+				}else if(scrollTop>maxHeight){
+					scrollTop=maxHeight;
+				}
+				//比例
+				var scaleY=scrollTop/maxHeight;
+				slide.style.top=scrollTop+'px';
+				textCon.style.top=-(textCon.offsetHeight-text.offsetHeight)*scaleY+'px';
+			}
+			
+			
+			//滚轮滚动
+			myScroll(box,function(){
+				scrollTop-=10;
+				scroll();
+			},function(){
+				scrollTop+=10;
+				scroll();
+			});
+			//滚轮事件封装函数
+			function myScroll(obj,fnUp,fnDown){
+				obj.onmousewheel=fn;//IE/Chrome
+				obj.addEventListener('DomMousescroll',fn);//FF
+				
+				function fn(ev){
+					if(ev.wheelDelta>0 || ev.detail<0){
+						fnUp.call(obj);
+					}else{
+						fnDown.call(obj);
+					}
+					ev.preventDefault();//阻止浏览器默认行为
+					return false;//阻止浏览器默认行为
+				}
+			}
+			
+			
+			//上下箭头功能
+			for(var i=0;i<btns.length;i++){
+				btns[i].index=i;
+				btns[i].onmousedown=function(){
+					this.className='active';
+					var n=this.index;
+					/*
+					 *this.index代表索引,用来区分是上箭头或者下箭头
+					 * 如果点了上箭头，要让scrollTop不断的减
+					 * 如果点了下箭头，要让scrollTop不断的加
+					 */
+					timer=setInterval(function(){
+						scrollTop=n?scrollTop+5:scrollTop-5;
+						scroll();
+					},16)
+				}
+				btns[i].onmouseup=function(){
+					clearInterval(timer);
+					this.className='';
+				}
+			}
+			
+			
+			//滑块区域点击功能
+			slideWarp.onmousedown=function(ev){
+				timer=setInterval(function(){
+					var slideTop=slide.getBoundingClientRect().top+slide.offsetHeight/2;
+					if(ev.clientY<slideTop){
+						//这个条件成立说明现在鼠标在滑块的上面，滚动条往上走
+						scrollTop-=5;
+					}else{
+						//否则鼠标在滑块的下面，滚动条往下走
+						scrollTop+=5;
+					}
+					//如果他们俩的差在5以内，我们就认为到了中心点
+					if(Math.abs(ev.clientY-slideTop)<=5){
+						//Math.abs()求一个数字的绝对值
+						clearInterval(timer);
+					}
+					scroll();
+				},16)
+			}
+			slideWarp.onmouseup=function(){
+				clearInterval(timer);
+			}
+		</script>
+	</body>
+</html>

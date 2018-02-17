@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			img{
+				border: none;
+				vertical-align: middle;
+			}
+			ul{
+				list-style: none;
+			}
+			#turntable{
+				background: url(images/luck_bg.png) no-repeat center;
+				width: 1226px;
+				height: 1087px;
+				margin:0 auto;
+				padding-top: 160px;
+				box-sizing: border-box;
+				position: relative;
+				text-align: center;
+			}
+			.lottery{
+				background: url(images/lottery_bg.png) no-repeat left;
+				width:576px;
+				height: 252px;
+				position: absolute;
+				top: 397px;
+				left: 325px;
+				padding: 42px 33px 40px;
+				box-sizing: border-box;
+			}
+			.turntableText{
+				margin-top: 57px;
+			}
+			.turntableText p{
+				font: 22px/40px "微软雅黑";
+				color: #f5deaa;
+				text-align: center;
+			}
+			ul{
+				width: 1112px;
+		    	height: 706px;
+		    	margin: 0 auto;
+		    	position: relative;
+			}
+			ul li{
+				display: inline-block;
+				width: 296px;
+		    	height: 252px;
+		    	text-align: center;
+		    	border-radius: 15px;
+				background: url(images/prizes_bg.png) no-repeat center;
+				position: absolute;
+			}
+			ul li:nth-child(1){
+				top: -8px;
+    			left: -12px;
+			}
+			ul li:nth-child(2){
+				top: -8px;
+    			left: 270px;
+			}
+			ul li:nth-child(3){
+				top: -8px;
+    			left: 552px;
+			}
+			ul li:nth-child(4){
+				top: -8px;
+    			left: 835px;
+			}
+			ul li:nth-child(5){
+				top: 238px;
+    			left: -12px;
+			}
+			ul li:nth-child(6){
+				top: 238px;
+    			left: 835px;
+			}
+			ul li:nth-child(7){
+				top: 482px;
+    			left: -12px;
+			}
+			ul li:nth-child(8){
+				top: 482px;
+    			left: 270px;
+			}
+			ul li:nth-child(9){
+				top: 482px;
+    			left: 550px;
+			}
+			ul li:nth-child(10){
+				top: 482px;
+    			left: 835px;
+			}
+			li.active {
+    			background-color: #fbe4ae;
+    		}
+			ul li img{
+				display: block;
+				margin: 39px auto 20px;
+			}
+			ul li span{
+			    font-size: 22px;
+			    font-weight: 600;
+			    color: #c01910;
+			    position: absolute;
+			    left: 50%;
+			    bottom: 35px;
+			    transform: translateX(-50%);
+			    white-space: nowrap;
+			}
+		</style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="turntable">
+			<ul>
+				<li v-for="(item,index) in luckyPrize">
+					<img :src="'images/'+item.pic" alt="">
+               <span>{{item.text}}</span>
+				</li>
+			</ul>
+			<div class="lottery">
+				<a href="javascript:;">
+					<img src="images/lottery.png" alt="" />
+				</a>
+			</div>
+			<div class="turntableText">
+				<p>
+					活动时间：
+					<span>2018-01-18 00:00:00 -- 2018-03-02 23:59:59</span>
+				</p>
+				<p>每消耗一个吉祥币可进行一次抽奖。</p>
+			</div>
+		</div>
+		<script type="text/javascript">
+			//幸运大转盘奖品
+			var luckyPrizeData=[
+			{pic:'money1.png',text:'0.88元现金'},
+			{pic:'money2.png',text:'1.88元现金'},
+			{pic:'redbag1.png',text:'8.88元理财红包'},
+			{pic:'redbag2.png',text:'18.88元理财红包'},
+			{pic:'360.png',text:'360儿童手表  ￥299'},
+			{pic:'air.png',text:'小米空气净化器 ￥699'},
+			{ pic:'trunk.png', text:'品牌铝框拉杆箱' },
+			{ pic:'nut.png', text:'年货坚果 ￥168' },
+			{ pic:'zao.jpg', text:'新疆和田大枣 ￥68' },
+			{ pic:'travel.jpg', text:'马尔代夫5天游 ￥15000'}
+			];
+			new Vue({
+				el:"#turntable",
+				data:{
+					luckyPrize:luckyPrizeData
+				}
+			})
+		</script>
+	</body>
+</html>

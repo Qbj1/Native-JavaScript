@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#box{
+				width: 480px;
+				height: 480px;
+				box-shadow: 0 0 100px #C0C0C0;
+				margin: auto;
+				position: relative;	
+				overflow: hidden;	
+			}
+			#box #pic{
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+			#box #pic img{
+				width: 480px;
+				height: 480px;
+				vertical-align: middle;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<div id="pic">
+				<img src="img/1.png" alt="" />
+				<img src="img/2.png" alt="" />
+				<img src="img/3.png" alt="" />
+				<img src="img/4.png" alt="" />
+				<img src="img/5.png" alt="" />
+			</div>
+		</div>
+		<script src="js/move.js"></script>
+		<script type="text/javascript">
+			var box=document.getElementById('box');
+			var pic=document.getElementById('pic');
+			var imgs=document.getElementsByTagName('img');
+			var w=imgs[0].offsetWidth;//图片的宽度
+			var h=imgs[0].offsetHeight;//图片的高度
+			var moving=true;
+			document.onkeydown=function(ev){
+				//如果用户连续按键，会出现问题
+				//条件语句和moving=false位置不能变
+				if(!moving){
+					//如果这个条件成立，说明现在是不可点击的状态
+					return;
+				}
+				moving=false;//运动开始了，让它的值为false，让用户不能点击了
+				switch(ev.keyCode){
+					case 37://往左走	
+					pic.style.width=w*imgs.length+'px';//左右走得把pic宽度设为所有图片加起来的总宽度，这样图片就能横排显示
+					move(pic,{left:-w},500,'linear',function(){
+						//运动走完，把走过去的图片添加到pic最后面
+						pic.appendChild(imgs[0]);
+						pic.style.left=0;
+						moving=true;//运动停止了，让它的值为true，让用户可以再次点击
+					});
+					break;
+					case 39://往右走
+					pic.style.width=w*imgs.length+'px';
+					//往右走的话，要先把最后一张图片插入到最前面
+					pic.insertBefore(imgs[imgs.length-1],imgs[0]);
+					pic.style.left=-w+'px';
+					move(pic,{left:0},500,'linear',function(){	
+						moving=true;
+					});
+					break;
+					case 38://往上走
+					pic.style.width=w+'px';//上下走得把pic宽度设为图片的宽度，这样图片就能竖排显示
+					move(pic,{top:-h},500,'linear',function(){
+						pic.appendChild(imgs[0]);//把第一张图片添加到pic最后面
+						pic.style.top=0;
+						moving=true;
+					});
+					break;
+					case 40://往下走
+					pic.style.width=w+'px';
+					pic.insertBefore(imgs[imgs.length-1],imgs[0]);
+					pic.style.top=-w+'px';
+					move(pic,{top:0},500,'linear',function(){	
+						moving=true;
+					});
+					break;
+				}
+				
+			}
+		</script>
+		<!--<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+		</ul>
+		<script type="text/javascript">
+			var ul=document.querySelector('ul');
+			var lis=document.getElementsByTagName('li');
+			ul.onclick=function(){
+				ul.insertBefore(lis[2],lis[0]);
+			}			
+		</script>-->
+	</body>
+</html>

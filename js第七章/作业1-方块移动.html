@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#box {
+				width: 100px;
+				height: 100px;
+				background: #007FD5;
+				position: absolute;
+				top: 200px;
+				left: 600px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="box"></div>
+		<script type="text/javascript">
+			var box = document.getElementById('box');
+			var step = 10; //移动的距离
+			var key={
+				37:false,//左
+				38:false,//上
+				39:false,//右
+				40:false//下
+			}
+			
+			document.onkeydown = function(ev) {
+				key[ev.keyCode]=true;
+			};
+			document.onkeyup = function(ev) {
+				key[ev.keyCode]=false;
+			};
+			//解决卡顿用重复定时器
+			var timer=setInterval(function(){
+				if(key[37]){//左
+					box.style.left=box.offsetLeft-step+'px';
+				}
+				if(key[38]){//上
+					box.style.top=box.offsetTop-step+'px';
+				}
+				if(key[39]){//右
+					box.style.left=box.offsetLeft+step+'px';
+				}
+				if(key[40]){//下
+					box.style.top=box.offsetTop+step+'px';
+				}
+			},16);
+			
+			
+		</script>
+	</body>
+
+</html>

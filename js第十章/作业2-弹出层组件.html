@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			body,ul,p{
+				margin:0;
+			}
+			ul{
+				padding: 0;
+				list-style: none;
+				width: 500px;
+				font-size: 0;
+				margin: auto;
+			}
+			ul li{
+				display: inline-block;
+				padding: 0 10px;
+				height: 30px;
+				font:20px/30px "微软雅黑";
+				border-radius: 5px;
+				background:#007FD5;
+				text-align: center;
+				color: #fff;
+				margin: 0 20px;
+				cursor: pointer;
+			}
+			/*弹窗*/
+			.box{
+				width: 430px;
+				height: 330px;
+				border-radius: 5px;
+				background: #ebf2f9;
+				margin: auto;				
+				position: absolute;
+			}
+			/*标题*/
+			.title{
+				width: 100%;
+				height:185px;
+				text-align: center;
+				background: #3d4fae;
+				cursor: default;
+				border-radius: 5px;
+				position: relative;
+			}
+			.title span{
+				font: 40px/185px "微软雅黑";
+				color: #fff;
+			}
+			.close{
+				font-style: normal;
+				font-size: 30px;
+				color: #fff;
+				position: absolute;
+				top: 0;
+				right:10px;
+			}
+			.close:hover{
+				color: #e81123;
+			}
+			.content{
+				font: 20px/107px "微软雅黑";
+				text-align: center;
+			}
+			input[type=button]{
+				border: none;
+				width: 195px;
+				height: 30px;
+				background: #00a3ff;
+				text-align: center;
+				color: #fff;
+				font: 15px/30px "微软雅黑";
+				border-radius:5px;
+				margin: 0 118px;
+				letter-spacing: 10px;
+			}
+			input[type=button]:hover{
+				opacity: .8;
+			}
+			.mask{
+				width: 100%;
+				height: 100%;
+				position: fixed;
+				top: 0;
+				left: 0;
+				background: rgba(0,0,0,.8);
+				z-index: -1;
+			}
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li>屏幕中间</li>						
+			<li>右下角</li>			
+			<li>屏幕中间-遮罩层</li>			
+		</ul>
+		<!--遮罩层-->
+		<!--<div class="mask"></div>-->		
+		<!--弹窗-->
+		<!--<div class="box">
+			<div class="title">
+				<span>TIM</span>
+				<i class="close" id="close">&otimes;</i>
+			</div>			
+			<div class="content">内容</div>
+			<input type="button" id="btn" value="登录"/>
+		</div>-->
+	</body>
+	<!--<script src="js/events.js"></script>-->			
+	<script type="text/javascript">
+		var ul=document.querySelector('ul');
+		var lis=ul.querySelectorAll('ul li');
+
+		//屏幕中间
+		lis[0].onclick=function(){
+			var obj=new Popup();
+			obj.init({
+				w:430,
+				h:330,
+				pos:'center'
+			});
+		}
+		//右下角
+		lis[1].onclick=function(){
+			var obj=new Popup();
+			obj.init({
+				w:430,
+				h:330,
+				pos:'right'
+			});
+		}
+		//屏幕中间-遮罩层
+		lis[2].onclick=function(){
+			var obj=new Popup();
+			obj.init({
+				w:430,
+				h:330,
+				pos:'center'
+			});
+		}
+		//构造函数
+		function Popup(){
+			this.box=null;
+			//默认参数
+			this.settings={				
+				w:430,
+				h:330,
+				pos:''
+			}
+		}
+		Popup.prototype={
+			constructor:Popup,
+			init:function(opt){//初始化函数
+				for(var attr in this.settings){
+					if(this.settings.hasOwnProperty(attr)){
+						this.settings[attr]=opt[attr];
+					}
+				}
+				//当初始化完了以后，首先应该先创建dom
+				this.createDom();
+			},
+			createDom:function(){
+				this.box=document.createElement('div');//创建元素div
+				this.mask=document.createElement('div');
+				this.mask.className='mask';
+				this.box.className='box';
+				this.box.innerHTML='<div class="title"><span>TIM</span><i class="close" id="close">&otimes;</i></div>'+'<div class="content">内容</div>'+'<input type="button" id="btn" value="登录"/>'
+				document.body.appendChild(this.box);//添加元素到父节点的最后面
+				document.body.appendChild(this.mask);
+				this.view();
+				this.close();
+			},
+			view:function(){
+				this.box.style.width=this.settings.w+'px';
+				this.box.style.height=this.settings.h+'px';
+				switch(this.settings.pos){
+					case 'center':
+						this.box.style.left='50%';
+						this.box.style.top='50%';
+						this.box.style.transform='translate(-50%,-50%)';
+						break;
+					case 'right':
+						this.box.style.right=0;
+						this.box.style.bottom=0;
+						break;
+					}
+			},
+			close:function(){
+				var close=this.box.querySelector('.close');				
+				var This=this; 
+				close.onclick=function(){
+				    document.body.removeChild(This.box);//移除元素
+				    document.body.removeChild(This.mask);
+				}
+			}
+			
+		};
+	</script>
+</html>

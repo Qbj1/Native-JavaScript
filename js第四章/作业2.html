@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+	<style type="text/css">
+		#box{
+			width: 662px;
+			height: 461px;
+			box-sizing: border-box;
+			border: 1px solid #b7e1ea;
+			border-radius: 10px;
+			background-color: #fff;
+			padding: 26px;
+			margin: 10px auto;
+			position: relative;
+		}
+		#top{
+			width: 485px;
+			height: 198px;
+			border: 1px solid #b7e1ea;
+			border-top:none;
+			background-color: #ecf8fb;
+			padding: 20px 20px 17px 17px;
+			box-sizing: border-box;
+		}
+		#top p{
+			font: 18px/33px "微软雅黑";
+			color: #010001;
+		}
+		#btn{
+			position: absolute;
+			top: 27px;right: 26px;
+			font:19px/63px "微软雅黑";
+		}
+		#btn a{
+			display:block;
+			color: #fff;
+			margin-bottom: 5px;
+			width: 108px;
+			height: 63px;
+			border-radius: 5px;
+			text-align: center;
+		}
+		#drop,#bottom,#lookup,#replace{
+			display: none;
+		}
+		
+		#bottom{
+			box-sizing: border-box;
+			width: 610px;
+			height: 163px;
+			border: 1px solid #b7e1ea;
+			border-radius: 5px;
+			margin-top: 45px;
+			background-color: #ecf8fb;
+			padding-left:18px;
+			position: relative;
+		}
+		#bottom button{
+			position: absolute;
+			top: 0;right:6px;
+			border: none;
+			background: #ecf8fb;
+			font-size: 30px;
+			line-height: 30px;
+			color:#90e2f2;
+		}
+		#bottom .lr{
+			width: 573px;
+			border-bottom: 1px solid #90e2f2;
+			margin: 18px 0;
+		}
+		#bottom .lr a{
+			display: inline-block;
+			width: 71px;
+			text-align: center;
+			line-height: 36px;
+			font-size: 15px;
+			margin-bottom: 4px;
+			color: #000;
+		}
+		.active{
+			
+			background: #a8a6f5;
+		}
+		.visited{
+			background: #9fe7a9;
+			
+		}
+		#lookup .text{
+			width: 368px;
+			height: 46px;
+			border: 1px solid #abdde7;
+			font-size: 20px;
+			text-indent: 10px;
+		}
+		#lookup .btn2{
+			border: none;
+			font-size: 18px;
+			line-height: 46px;
+			width: 86px;
+			text-align: center;
+			background: #a8a6f5;
+			margin-top: 2px;
+			color:#fff;	
+		}
+		#replace{
+			display: none;
+		}
+		#replace .text{
+			border: 1px solid #abdde7;
+			width: 200px;
+			height: 46px;
+			margin-right: 10px;
+			font-size: 20px;
+			text-indent: 10px;
+		}
+		#replace .btn2{
+			border: none;
+			font-size: 18px;
+			line-height: 46px;
+			width: 86px;
+			text-align: center;
+			background: #9fe7a9;
+			margin-top: 2px;
+			color:#fff;	
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload=function(){
+			var show=document.getElementById('show');
+			
+			var drop=document.getElementById('drop');
+			var as=drop.getElementsByTagName('a');
+			
+			var bottom=document.getElementById('bottom');
+			var aa=bottom.getElementsByTagName('a');
+			var button=bottom.querySelector('#bottom button');
+			var inputs=bottom.getElementsByTagName('input');
+			var lookup=document.getElementById('lookup');
+			var replace=document.getElementById('replace');
+			
+			var p=document.querySelector('p');
+			var n=0;
+			
+			show.onclick=function(){
+				n++;
+				drop.style.display=n%2?'block':'none';
+			};
+			
+			as[0].onclick=function(){
+				bottom.style.display='block';
+				lookup.style.display='block';
+				replace.style.display='none';
+				aa[0].className='active';
+				aa[1].className='';
+			}
+			as[1].onclick=function(){
+				bottom.style.display='block';
+				replace.style.display='block';
+				lookup.style.display='none';
+				aa[1].className='visited';
+				aa[0].className='';
+			};
+			
+			aa[0].onclick=function(){
+				lookup.style.display='block';
+				replace.style.display='none';
+				aa[0].className='active';
+				aa[1].className='';
+			}
+			aa[1].onclick=function(){
+				replace.style.display='block';
+				lookup.style.display='none';
+				aa[1].className='visited';
+				aa[0].className='';
+			};
+			
+			button.onclick=function(){
+				bottom.style.display='none';
+				//drop.style.display='none';
+			};
+			/*
+			 * string.split()  字符串分割成数组
+			 * array.join()    将数组里的数据连接成一个字符串
+			 */
+			inputs[1].onclick=function(){
+				var val=inputs[0].value;
+				if(val==''){
+					alert('请输入内容');
+					return;
+				}
+				if(p.innerHTML.indexOf(val)==-1){
+					alert('没有找到');
+					inputs[0].value='';
+					return;
+				}
+				var correct=p.innerHTML.split(val);
+				console.log(correct);//数组
+				p.innerHTML=correct.join('<span style="background:yellow;">'+val+'</span>');
+				inputs[0].value='';
+			};
+
+			inputs[4].onclick=function(){
+				var val1=inputs[2].value;
+				var val2=inputs[3].value;
+				if(val1==''){
+					alert('请输入要替换的内容');
+					return;
+				}
+				if(p.innerHTML.indexOf(val1)==-1){
+					alert('没有找到');
+					return;
+				}
+				var correct=p.innerHTML.split(val1);
+				p.innerHTML=correct.join(val2);
+				inputs[2].value='';
+				inputs[3].value='';
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		
+		<div id="top">
+			<p>JavaScript一种直译式脚本语言,是一种动态类型、弱类型、基于原型的语言,内置支持类型。它的解释器被称为JavaScript引擎,为浏览器的一部分,广泛用于客户端的脚本语言,最早是在HTML(标准通用标记语言下的一个应用)网页上使用,用来给HTML网页增加动态功能</p>
+		</div>
+		<div id="btn">
+			<a href="#" style="background: #90e1f2;" id="show">展开</a>
+			<div id="drop">
+				<a href="#" class="active">查找</a>
+				<a href="#" class="visited">替换</a>
+			</div>
+		</div>
+		
+		<div id="bottom">
+			<button>×</button>
+			<div class="lr">
+				<a href="#">查找</a>
+				<a href="#">替换</a>
+			</div>
+			<div id="lookup">
+				<input type="text" class="text"/>
+				<input type="button" value="查找" class="btn2"/>
+			</div>
+			<div id="replace">
+				<input type="text" class="text" placeholder="请输入要替换的内容"/>
+				<input type="text" class="text"/>
+				<input type="button" value="替换" class="btn2"/>
+			</div>
+		</div>
+		
+	</div>
+
+</body>
+</html>

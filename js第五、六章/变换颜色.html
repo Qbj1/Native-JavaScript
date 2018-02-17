@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			body{margin: 0;}
+			ul{
+				padding: 0;
+				width: 400px;
+				margin:50px auto;
+				/*border: 1px solid #000099;*/
+				outline: #000 double 3px;/*轮廓(outline)*/
+			}
+			ul li{
+				list-style: none;
+				height: 50px;
+				background-color: #f00;
+				margin-bottom: 12px;
+			}
+			ul li:nth-last-child(1){
+				margin-bottom: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<script type="text/javascript">
+			var lis=document.querySelectorAll('ul li');
+			for(var i=0;i<lis.length;i++){
+				lis[i].onmouseover=function(){
+					for(var i=0;i<lis.length;i++){
+						lis[i].style.background='#f00';
+					}
+					this.style.background='green';
+					if(this.previousElementSibling){
+						this.previousElementSibling.style.background='yellow';
+					}
+					if(this.nextElementSibling){
+						this.nextElementSibling.style.background='yellow';
+					}
+					
+				}
+			}
+		</script>
+	</body>
+</html>
